@@ -1,7 +1,7 @@
 Guides
 ======
 
-Our communication for programming with style 🐜
+Our programming communication style 🐜
 
 * [Style](./style)
 
