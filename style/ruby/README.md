@@ -1,4 +1,2 @@
 Ruby
 ====
-
-[Sample](sample.rb)
