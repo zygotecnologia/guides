@@ -11,3 +11,4 @@ We have the following more detailed style guides:
 
 * [Ruby](ruby)
 * [Git](git)
+* [HTML](html)
