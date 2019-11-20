@@ -403,7 +403,6 @@ bluths.select(&:blue_self?)
 
 ## Collections
 
-
 ### Empty collections literals
 
 Prefer literal array and hash creation notation unless you need to pass parameters to their constructors.
@@ -419,6 +418,38 @@ hash = {}
 
 # good because constructor requires parameters
 x = Hash.new { |h, k| h[k] = {} }
+```
+
+### Multi-line Hashes
+
+Use multi-line hashes when it makes the code more readable, and use trailing commas to ensure that parameter changes don't cause extraneous diff lines when the logic has not otherwise changed.
+
+```ruby
+hash = {
+  :protocol => 'https',
+  :only_path => false,
+  :controller => :users,
+  :action => :set_password,
+  :redirect => @redirect_url,
+  :secret => @secret,
+}
+```
+
+### Array trailing comma
+
+Use a trailing comma in an Array that spans more than 1 line[link]
+
+```ruby
+# good
+array = [1, 2, 3]
+
+# good
+array = [
+  "car",
+  "bear",
+  "plane",
+  "zoo",
+]
 ```
 
 ## No Single-line Methods
@@ -514,4 +545,216 @@ Date.iso8601('2016-06-29')
 
 # good - uses DateTime with start argument for historical date
 DateTime.iso8601('1751-04-23', Date::ENGLAND)
+```
+
+## String Concatenation
+
+Avoid using String#+ when you need to construct large data chunks. Instead, use String#<<. Concatenation mutates the string instance in-place and is always faster than String#+, which creates a bunch of new string objects.
+
+```ruby
+# bad
+html = ''
+html += '<h1>Page title</h1>'
+
+paragraphs.each do |paragraph|
+  html += "<p>#{paragraph}</p>"
+end
+
+# good and also fast
+html = ''
+html << '<h1>Page title</h1>'
+
+paragraphs.each do |paragraph|
+  html << "<p>#{paragraph}</p>"
+end
+```
+
+## Classes & Modules
+
+### Consistent Classes
+
+Use a consistent structure in your class definitions.
+
+```ruby
+class Person
+  # extend and include go first
+  extend SomeModule
+  include AnotherModule
+
+  # inner classes
+  CustomError = Class.new(StandardError)
+
+  # constants are next
+  SOME_CONSTANT = 20
+
+  # afterwards we have attribute macros
+  attr_reader :name
+
+  # followed by other macros (if any)
+  validates :name
+
+  # public class methods are next in line
+  def self.some_method
+  end
+
+  # initialization goes between class methods and other instance methods
+  def initialize
+  end
+
+  # followed by other public instance methods
+  def some_method
+  end
+
+  # protected and private methods are grouped near the end
+  protected
+
+  def some_protected_method
+  end
+
+  private
+
+  def some_private_method
+  end
+end
+```
+
+### Namespace Definition
+
+Define (and reopen) namespaced classes and modules using explicit nesting. Using the scope resolution operator can lead to surprising constant lookups due to Ruby’s lexical scoping, which depends on the module nesting at the point of definition.
+
+```ruby
+module Utilities
+  class Queue
+  end
+end
+
+# bad
+class Utilities::Store
+  Module.nesting # => [Utilities::Store]
+
+  def initialize
+    # Refers to the top level ::Queue class because Utilities isn't in the
+    # current nesting chain.
+    @queue = Queue.new
+  end
+end
+
+# good
+module Utilities
+  class WaitingList
+    Module.nesting # => [Utilities::WaitingList, Utilities]
+
+    def initialize
+      @queue = Queue.new # Refers to Utilities::Queue
+    end
+  end
+end
+```
+
+### Indent public/private/protected
+
+Indent the public, protected, and private methods as much as the method definitions they apply to. Leave one blank line above the visibility modifier and one blank line below in order to emphasize that it applies to all methods below it.
+
+```ruby
+# good
+class SomeClass
+  def public_method
+    # some code
+  end
+
+  private
+
+  def private_method
+    # some code
+  end
+
+  def another_private_method
+    # some code
+  end
+end
+```
+
+## Source Code Layout
+
+> Nearly everybody is convinced that every style but their own is ugly and unreadable. Leave out the "but their own" and they’re probably right…​
+
+— Jerry Coffin (on indentation)
+
+### Indent Conditional Assignment
+
+When assigning the result of a conditional expression to a variable, preserve the usual alignment of its branches.
+
+```ruby
+# bad - pretty convoluted
+kind = case year
+when 1850..1889 then 'Blues'
+when 1890..1909 then 'Ragtime'
+when 1910..1929 then 'New Orleans Jazz'
+when 1930..1939 then 'Swing'
+when 1940..1950 then 'Bebop'
+else 'Jazz'
+end
+
+result = if some_cond
+  calc_something
+else
+  calc_something_else
+end
+
+# good - it's apparent what's going on
+kind = case year
+       when 1850..1889 then 'Blues'
+       when 1890..1909 then 'Ragtime'
+       when 1910..1929 then 'New Orleans Jazz'
+       when 1930..1939 then 'Swing'
+       when 1940..1950 then 'Bebop'
+       else 'Jazz'
+       end
+
+result = if some_cond
+           calc_something
+         else
+           calc_something_else
+         end
+
+# good (and a bit more width efficient)
+kind =
+  case year
+  when 1850..1889 then 'Blues'
+  when 1890..1909 then 'Ragtime'
+  when 1910..1929 then 'New Orleans Jazz'
+  when 1930..1939 then 'Swing'
+  when 1940..1950 then 'Bebop'
+  else 'Jazz'
+  end
+
+result =
+  if some_cond
+    calc_something
+  else
+    calc_something_else
+  end
+```
+
+## Flow of Control
+
+### Double Negation
+
+Avoid the use of !!.
+
+!! converts a value to boolean, but you don’t need this explicit conversion in the condition of a control expression; using it only obscures your intention. If you want to do a nil check, use nil? instead.
+
+```ruby
+# bad
+x = 'test'
+# obscure nil check
+if !!x
+  # body omitted
+end
+
+# good
+x = 'test'
+if x
+  # body omitted
+end
 ```
