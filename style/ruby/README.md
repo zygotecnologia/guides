@@ -199,7 +199,7 @@ STATES = [:draft, :open, :closed]
 STATES = %i[draft open closed]
 ```
 
-##Symbols as Keys
+## Symbols as Keys
 
 Prefer symbols instead of strings as hash keys.
 
