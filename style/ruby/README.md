@@ -1,2 +1,517 @@
 Ruby
 ====
+
+This Ruby style guide recommends best practices so that real-world Ruby programmers can write code that can be maintained by other real-world Ruby programmers.
+
+## Bang Methods
+
+They are questions, and do not modify the object they are called on.
+
+For example:
+
+```ruby
+name = "Ruby Monstas"
+puts name.downcase
+puts name
+```
+
+This will output:
+
+```text
+ruby monstas
+Ruby Monstas
+```
+
+As you can see the method downcase has returned a new String, which is the lowercase version of the String that the method is being called on. When we output the original String on the next line, we can then see that it’s still the same: The method downcase does not modify the String.
+
+However, there also are variants of some of these methods, which end in an exclamation mark !. These methods are called “bang methods”, and they usually modify the object that they’re being called on.
+
+> Bang methods end with an exlamation mark, and often modify the object they are called on.
+
+For example, next to the method downcase Strings also have a method downcase!.
+
+Let’s try that:
+
+```ruby
+name = "Ruby Monstas"
+puts name.downcase!
+puts name
+```
+
+This will output:
+
+```text
+ruby monstas
+ruby monstas
+```
+
+As you can see calling the method downcase! on the second line has modified the String itself (the object that name refers to), and also returned the new downcased version.
+
+> Use bang methods with caution!
+
+## Dangerous Method Bang
+
+The names of potentially _dangerous_ methods (i.e. methods that modify `self` or the arguments, `exit!` (doesn't run the finalizers like `exit` does), etc) should end with an exclamation mark if there exists a safe version of that _dangerous_ method.
+
+```ruby
+# bad - there is no matching 'safe' method
+class Person
+  def update!
+  end
+end
+
+# good
+class Person
+  def update
+  end
+end
+
+# good
+class Person
+  def update!
+  end
+
+  def update
+  end
+end
+```
+
+## Safe Because Unsafe
+
+Define the non-bang (safe) method in terms of the bang (dangerous) one if possible.
+
+```ruby
+class Array
+  def flatten_once!
+    res = []
+
+    each do |e|
+      [*e].each { |f| res << f }
+    end
+
+    replace(res)
+  end
+
+  def flatten_once
+    dup.flatten_once!
+  end
+end
+```
+
+## Spaces and Braces
+
+No spaces after (, [ or before ], ). Use spaces around { and before }.
+
+```ruby
+# bad
+some( arg ).other
+[ 1, 2, 3 ].each{|e| puts e}
+
+# good
+some(arg).other
+[1, 2, 3].each { |e| puts e }
+{ and } deserve a bit of clarification, since they are used for block and hash literals, as well as string interpolation.
+```
+
+For hash literals two styles are considered acceptable. The first variant is slightly more readable (and arguably more popular in the Ruby community in general). The second variant has the advantage of adding visual difference between block and hash literals. Whichever one you pick - apply it consistently.
+
+```ruby
+# good - space after { and before }
+{ one: 1, two: 2 }
+
+# good - no space after { and before }
+{one: 1, two: 2}
+```
+
+With interpolated expressions, there should be no padded-spacing inside the braces.
+
+```ruby
+# bad
+"From: #{ user.first_name }, #{ user.last_name }"
+
+# good
+"From: #{user.first_name}, #{user.last_name}"
+```
+
+## No and or or
+
+The and and or keywords are banned. The minimal added readability is just not worth the high probability of introducing subtle bugs. For boolean expressions, always use && and || instead. For flow control, use if and unless; && and || are also acceptable but less clear.
+
+```ruby
+# bad
+# boolean expression
+ok = got_needed_arguments and arguments_are_valid
+
+# control flow
+document.save or raise("Failed to save document!")
+
+# good
+# boolean expression
+ok = got_needed_arguments && arguments_are_valid
+
+# control flow
+raise("Failed to save document!") unless document.save
+
+# ok
+# control flow
+document.save || raise("Failed to save document!")
+```
+
+## No Multi-line if Modifiers
+
+Avoid modifier if/unless usage at the end of a non-trivial multi-line block.
+
+```ruby
+# bad
+10.times do
+  # multi-line body omitted
+end if some_condition
+
+# good
+if some_condition
+  10.times do
+    # multi-line body omitted
+  end
+end
+```
+
+## %w
+
+Prefer %w to the literal array syntax when you need an array of words (non-empty strings without spaces and special characters in them). Apply this rule only to arrays with two or more elements.
+
+```ruby
+# bad
+STATES = ['draft', 'open', 'closed']
+
+# good
+STATES = %w[draft open closed]
+```
+
+## %i
+
+Prefer %i to the literal array syntax when you need an array of symbols (and you don’t need to maintain Ruby 1.9 compatibility). Apply this rule only to arrays with two or more elements.
+
+```ruby
+# bad
+STATES = [:draft, :open, :closed]
+
+# good
+STATES = %i[draft open closed]
+```
+
+##Symbols as Keys
+
+Prefer symbols instead of strings as hash keys.
+
+```ruby
+# bad
+hash = { 'one' => 1, 'two' => 2, 'three' => 3 }
+
+# good
+hash = { one: 1, two: 2, three: 3 }
+```
+
+## Boolean Methods Question Mark
+
+The names of predicate methods (methods that return a boolean value) should end in a question mark (i.e. Array#empty?). Methods that don’t return a boolean, shouldn’t end in a question mark.
+
+## Boolean Methods Prefix
+
+Avoid prefixing predicate methods with the auxiliary verbs such as is, does, or can. These words are redundant and inconsistent with the style of boolean methods in the Ruby core library, such as empty? and include?.
+
+```ruby
+# bad
+class Person
+  def is_tall?
+    true
+  end
+
+  def can_play_basketball?
+    false
+  end
+
+  def does_like_candy?
+    true
+  end
+end
+
+# good
+class Person
+  def tall?
+    true
+  end
+
+  def basketball_player?
+    false
+  end
+
+  def likes_candy?
+    true
+  end
+end
+```
+
+## No for Loops
+
+Do not use for, unless you know exactly why. Most of the time iterators should be used instead. for is implemented in terms of each (so you’re adding a level of indirection), but with a twist - for doesn’t introduce a new scope (unlike each) and variables defined in its block will be visible outside it.
+
+```ruby
+arr = [1, 2, 3]
+
+# bad
+for elem in arr do
+  puts elem
+end
+
+# note that elem is accessible outside of the for loop
+elem # => 3
+
+# good
+arr.each { |elem| puts elem }
+
+# elem is not accessible outside each's block
+elem # => NameError: undefined local variable or method `elem'
+```
+
+## ! vs not
+
+Use ! instead of not.
+
+```ruby
+# bad - parentheses are required because of op precedence
+x = (not something)
+
+# good
+x = !something
+```
+
+## No Space after Bang
+
+No space after !.
+
+```ruby
+# bad
+! something
+
+# good
+!something
+```
+
+## Method calls
+
+Never put a space between a method name and the opening parenthesis.
+
+```ruby
+# bad
+f (3 + 2) + 1
+
+# good
+f(3 + 2) + 1
+```
+
+## Syntax
+
+
+### Single line blocks
+
+Prefer {...} over do...end for single-line blocks. Avoid using {...} for multi-line blocks (multiline chaining is always ugly). Always use do...end for "control flow" and "method definitions" (e.g. in Rakefiles and certain DSLs). Avoid do...end when chaining.[link]
+
+```ruby
+names = ["Bozhidar", "Steve", "Sarah"]
+
+# good
+names.each { |name| puts name }
+
+# bad
+names.each do |name| puts name end
+
+# good
+names.each do |name|
+  puts name
+  puts 'yay!'
+end
+
+# bad
+names.each { |name|
+  puts name
+  puts 'yay!'
+}
+
+# good
+names.select { |name| name.start_with?("S") }.map { |name| name.upcase }
+
+# bad
+names.select do |name|
+  name.start_with?("S")
+end.map { |name| name.upcase }
+```
+
+### Assignment in condition
+
+Don't use the return value of = in conditionals.
+
+```ruby
+# bad - shows intended use of assignment
+if (v = array.grep(/foo/))
+  ...
+end
+
+# bad
+if v = array.grep(/foo/)
+  ...
+end
+
+# good
+v = array.grep(/foo/)
+if v
+  ...
+end
+```
+
+### Single action blocks
+
+When a method block takes only one argument, and the body consists solely of reading an attribute or calling one method with no arguments, use the &: shorthand. [link]
+
+```ruby
+# bad
+bluths.map { |bluth| bluth.occupation }
+bluths.select { |bluth| bluth.blue_self? }
+
+# good
+bluths.map(&:occupation)
+bluths.select(&:blue_self?)
+```
+
+## Naming
+
+* Use snake_case for methods and variables.
+
+* Use CamelCase for classes and modules. (Keep acronyms like HTTP, RFC, XML uppercase.)
+
+* Use SCREAMING_SNAKE_CASE for other constants.
+
+* The names of predicate methods (methods that return a boolean value) should end in a question mark. (i.e. Array#empty?).
+
+* The names of potentially "dangerous" methods (i.e. methods that modify self or the arguments, exit!, etc.) should end with an exclamation mark. Bang methods should only exist if a non-bang method exists. (More on this.)
+
+* Name throwaway variables `_`.
+
+  ```ruby
+  version = '3.2.1'
+  major_version, minor_version, _ = version.split('.')
+  ```
+
+## Collections
+
+
+### Empty collections literals
+
+Prefer literal array and hash creation notation unless you need to pass parameters to their constructors.
+
+```ruby
+# bad
+arr = Array.new
+hash = Hash.new
+
+# good
+arr = []
+hash = {}
+
+# good because constructor requires parameters
+x = Hash.new { |h, k| h[k] = {} }
+```
+
+## No Single-line Methods
+
+Avoid single-line methods. Although they are somewhat popular in the wild, there are a few peculiarities about their definition syntax that make their use undesirable. At any rate - there should be no more than one expression in a single-line method.
+
+```ruby
+# bad
+def too_much; something; something_else; end
+
+# okish - notice that the first ; is required
+def no_braces_method; body end
+
+# okish - notice that the second ; is optional
+def no_braces_method; body; end
+
+# okish - valid syntax, but no ; makes it kind of hard to read
+def some_method() body end
+
+# good
+def some_method
+  body
+end
+```
+
+## Percent Literal Braces
+
+Use the braces that are the most appropriate for the various kinds of percent literals.
+
+* () for string literals (%q, %Q).
+
+* [] for array literals (%w, %i, %W, %I) as it is aligned with the standard array literals.
+
+* {} for regexp literals (%r) since parentheses often appear inside regular expressions. That’s why a less common character with { is usually the best delimiter for %r literals.
+
+* () for all other literals (e.g. %s, %x)
+
+```ruby
+# bad
+%q{"Test's king!", John said.}
+
+# good
+%q("Test's king!", John said.)
+
+# bad
+%w(one two three)
+%i(one two three)
+
+# good
+%w[one two three]
+%i[one two three]
+
+# bad
+%r((\w+)-(\d+))
+%r{\w{1,2}\d{2,5}}
+
+# good
+%r{(\w+)-(\d+)}
+%r|\w{1,2}\d{2,5}|
+```
+
+## Ranges or between
+
+Use ranges or Comparable#between? instead of complex comparison logic when possible.
+
+```ruby
+# bad
+do_something if x >= 1000 && x <= 2000
+
+# good
+do_something if (1000..2000).include?(x)
+
+# good
+do_something if x.between?(1000, 2000)
+```
+
+## No DateTime
+
+Don’t use DateTime unless you need to account for historical calendar reform - and if you do, explicitly specify the start argument to clearly state your intentions.
+
+```ruby
+# bad - uses DateTime for current time
+DateTime.now
+
+# good - uses Time for current time
+Time.now
+
+# bad - uses DateTime for modern date
+DateTime.iso8601('2016-06-29')
+
+# good - uses Date for modern date
+Date.iso8601('2016-06-29')
+
+# good - uses DateTime with start argument for historical date
+DateTime.iso8601('1751-04-23', Date::ENGLAND)
+```
