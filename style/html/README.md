@@ -1,8 +1,8 @@
 HTML
 ====
-### Regras básicas de formatação
+### Basic formatting rules
 
-* Utilizar de dois espaços para o recuo da indentação;
+* Use soft-tabs with a two space indent;
 ```html
 <!-- Recommended -->
 <main>
@@ -19,7 +19,7 @@ HTML
 </main>
 ```
 
-* Utilizar somente lowercase;
+* Use only lowercase;
 ```html
 <!-- Recommended -->
 <main>
@@ -36,13 +36,13 @@ HTML
 </Main>
 ```
 
-* Não deixar espaço em branco a direita;
+* Never leave trailing whitespace;
 
-* Finalizar cada arquivo html com uma linha em branco.
+* End each file with a newline.
 
-### Outras regras de formatação
+### Other formatting rules
 
-* Para texto em negrito utilizar a tag **strong**;
+* To bold text, use the **strong** tag;
 ```html
 <!-- Recommended -->
 <p><strong>Lorem ipsum</strong></p>
@@ -54,6 +54,7 @@ HTML
 <p><b>Lorem ipsum</b></p>
 ```
 
+* Use **span** tag only to apply styles to the contents;
 * Utilizar da tag **span** somente em casos de estilização dentro de uma outra tag de texto;
 ```html
 <!-- Recommended -->
@@ -63,7 +64,7 @@ HTML
 <span>Lorem ipsum</span>
 ```
 
-* Não utilizar tags **h(h1, h2, h3, h4..)** fora de títulos e subtítulos;
+* Don't use tags **h(h1, h2, h3, h4..)** outside titles and subtitles;
 ```html
 <!-- Recommended -->
 <h1>Título do post</h1>
@@ -87,10 +88,10 @@ HTML
 ```
 
 * Utilização da tag **ul** para listas não ordenadas e de **ol** para listas ordenadas;
-  * **Lista Ordenada**: É usada para descrever uma coleção ordenada de dados. Os navegadores geralmente exibem uma lista ordenada como uma lista numerada. Crie uma lista ordenada usando a tag **ol**;
-  * **Lista Não Ordenada**: É usada para descrever uma coleção não ordenada de dados. Os navegadores geralmente exibem uma lista não ordenada como uma lista com marcadores. Crie uma lista não ordenada usando a tag **ul**.
+  * **Ordered lists**: An ordered list is used to describe an ordered collection of data. Browsers usually display an ordered list as a numbered list. Create an ordered list using the **ol** tag.
+  * **Unordered lists**: An unordered list is used to describe an unordered collection of data. Browsers usually display an unordered list as a bulleted list. Create an unordered list using the **ul** tag.
 
-* Utilizar a tag **main** para o conteúdo principal da página;
+* Use the **main** tag to the main content of the page;
 ```html
 <!-- Recommended -->
 <html>
@@ -113,7 +114,7 @@ HTML
 </html>
 ```
 
-* As tags **input** e **label** devem estar no mesmo wrapper.
+* **Input** and **label** tags must be in the same wrapper;
 ```html
 <!-- Recommended -->
 <div>
@@ -138,7 +139,7 @@ HTML
 </div>
 ```
 
-* Utilizar sempre aspas duplas para os atributos;
+* Always use double quotes for attributes;
 ```html
 <!-- Recommended -->
 <label for="email">Qual é o seu e-mail?</label>
@@ -149,7 +150,7 @@ HTML
 <input type='text' id='email'>
 ```
 
-* O comentário de linha única deve ser colocado antes da tag;
+* Single line comment must be placed before tag;
 ```html
 <!-- Recommended -->
 <!-- TODO: Trocar este icone para o correto -->
@@ -160,7 +161,7 @@ HTML
 <!-- TODO: Trocar este icone para o correto -->
 ```
 
-* Os títulos devem ser colocados em ordem hierárquica;
+* Headlines must be places in hierarchical order;
 ```html
 <!-- Recommended -->
 <h1>Título</h1>
@@ -175,7 +176,7 @@ HTML
 <h1>Subtítulo</h1>
 ```
 
-* Novas linhas entre a tag e o conteúdo devem ser evitados;
+* Newline between tag name and content must be avoided;
 ```html
 <!-- Recommended -->
 <div>
@@ -189,7 +190,7 @@ HTML
 </div>
 ```
 
-* Não omitir tags opcionais;
+* Don't omit optional closing tags;
 ```html
 <!-- Recommended -->
 <!DOCTYPE html>
@@ -208,10 +209,10 @@ HTML
 <p>Qed.
 ```
 
-* Utilizar o HTML5;
-  * É recomendável utilizar o HTML, logo não use XHTML, XHTML. Não possui suporte a navegador, infraestrutura e oferece menos espaço para otimização que o HTML.
+* Use HTML5;
+  * It’s recommended to use HTML, as text/html. Do not use XHTML. XHTML, as application/xhtml+xml, lacks both browser and infrastructure support and offers less room for optimization than HTML.
 
-* Use HTTPS para recursos incorporados sempre que possível.
+* Use HTTPS for embedded resources where possible..
 ```html
 <!-- Recommended -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
