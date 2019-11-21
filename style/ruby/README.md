@@ -526,25 +526,22 @@ do_something if (1000..2000).include?(x)
 do_something if x.between?(1000, 2000)
 ```
 
-## No DateTime
+## No `DateTime`
 
-Don’t use DateTime unless you need to account for historical calendar reform - and if you do, explicitly specify the start argument to clearly state your intentions.
+Don’t use `DateTime` unless you need to account for historical calendar reform - and if you do,
+explicitly specify the start argument to clearly state your intentions.
+
+Use `Time.zone`.
 
 ```ruby
-# bad - uses DateTime for current time
+# bad
 DateTime.now
 
-# good - uses Time for current time
+# bad - missing timezone
 Time.now
 
-# bad - uses DateTime for modern date
-DateTime.iso8601('2016-06-29')
-
-# good - uses Date for modern date
-Date.iso8601('2016-06-29')
-
-# good - uses DateTime with start argument for historical date
-DateTime.iso8601('1751-04-23', Date::ENGLAND)
+# good
+Time.zone.now
 ```
 
 ## String Concatenation
