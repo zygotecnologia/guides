@@ -603,33 +603,18 @@ end
 
 ### Namespace Definition
 
-Define (and reopen) namespaced classes and modules using explicit nesting. Using the scope resolution operator can lead to surprising constant lookups due to Ruby’s lexical scoping, which depends on the module nesting at the point of definition.
+Define (and reopen) namespaced classes and modules using explicit nesting.
 
 ```ruby
-module Utilities
-  class Queue
-  end
-end
-
 # bad
 class Utilities::Store
-  Module.nesting # => [Utilities::Store]
-
-  def initialize
-    # Refers to the top level ::Queue class because Utilities isn't in the
-    # current nesting chain.
-    @queue = Queue.new
-  end
+  # ...
 end
 
 # good
 module Utilities
   class WaitingList
-    Module.nesting # => [Utilities::WaitingList, Utilities]
-
-    def initialize
-      @queue = Queue.new # Refers to Utilities::Queue
-    end
+    # ...
   end
 end
 ```
