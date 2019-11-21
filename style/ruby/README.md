@@ -479,38 +479,22 @@ def index; end
 
 ## Percent Literal Braces
 
-Use the braces that are the most appropriate for the various kinds of percent literals.
-
-* () for string literals (%q, %Q).
-
-* [] for array literals (%w, %i, %W, %I) as it is aligned with the standard array literals.
-
-* {} for regexp literals (%r) since parentheses often appear inside regular expressions. That’s why a less common character with { is usually the best delimiter for %r literals.
-
-* () for all other literals (e.g. %s, %x)
+Use always `[]` to define percent literals
 
 ```ruby
 # bad
 %q{"Test's king!", John said.}
-
-# good
-%q("Test's king!", John said.)
-
-# bad
 %w(one two three)
 %i(one two three)
-
-# good
-%w[one two three]
-%i[one two three]
-
-# bad
 %r((\w+)-(\d+))
 %r{\w{1,2}\d{2,5}}
 
 # good
-%r{(\w+)-(\d+)}
-%r|\w{1,2}\d{2,5}|
+%q["Test's king!", John said.]
+%w[one two three]
+%i[one two three]
+%r[(\w+)-(\d+)]
+%r[\w{1,2}\d{2,5}]
 ```
 
 ## Ranges or between
