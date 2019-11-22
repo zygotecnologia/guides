@@ -11,9 +11,9 @@ Chapters
 
 The guides are maintened by ours backend and frontend chapter, with each one responsible for some guides as below
 
-* Backend([@jplethier](https://github.com/jplethier), [@evsasse](https://github.com/orgs/zygotecnologia/people/evsasse), [@JoaoFagundes](https://github.com/orgs/zygotecnologia/people/JoaoFagundes), [@losoliveirasilva](https://github.com/orgs/zygotecnologia/people/losoliveirasilva), [@leandroh](https://github.com/orgs/zygotecnologia/people/leandroh))
+* Backend([@jplethier](https://github.com/jplethier), [@evsasse](https://github.com/evsasse), [@JoaoFagundes](https://github.com/JoaoFagundes), [@losoliveirasilva](https://github.com/losoliveirasilva), [@leandroh](https://github.com/leandroh))
   * [Ruby](./style/ruby)
-* Frontend([@jplethier](https://github.com/jplethier), [@abrunamartini](https://github.com/orgs/zygotecnologia/people/abrunamartini), [@CarlosMouraJR](https://github.com/orgs/zygotecnologia/people/CarlosMouraJR), [@jevel9](https://github.com/orgs/zygotecnologia/people/jevel9), [@natankruger](https://github.com/orgs/zygotecnologia/people/natankruger))
+* Frontend([@jplethier](https://github.com/jplethier), [@abrunamartini](https://github.com/abrunamartini), [@CarlosMouraJR](https://github.com/CarlosMouraJR), [@jevel9](https://github.com/jevel9), [@natankruger](https://github.com/natankruger))
   * [HTML](./style/html)
 
 Credits
