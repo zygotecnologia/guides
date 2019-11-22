@@ -76,24 +76,32 @@ class Person
 end
 ```
 
-## Safe Because Unsafe
+## Define safe using unsafe
 
 Define the non-bang (safe) method in terms of the bang (dangerous) one if possible.
 
 ```ruby
-class Array
-  def flatten_once!
-    res = []
-
-    each do |e|
-      [*e].each { |f| res << f }
-    end
-
-    replace(res)
+# bad
+class MyService
+  def call!(id)
+    MyModel.find(id)
   end
 
-  def flatten_once
-    dup.flatten_once!
+  def call(id)
+    MyModel.find_by(id: id)
+  end
+end
+
+# good
+class MyService
+  def call!(id)
+    MyModel.find(id)
+  end
+
+  def call(id)
+    call!(id)
+  rescue ActiveRecord::RecordNotFound
+    nil
   end
 end
 ```
