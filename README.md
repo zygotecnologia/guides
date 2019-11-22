@@ -3,7 +3,8 @@ Guides
 
 Our programming communication style 🐜
 
-* [Style](./style)
+* [HTML](./style/html)
+* [Ruby](./style/ruby)
 
 Credits
 -------
