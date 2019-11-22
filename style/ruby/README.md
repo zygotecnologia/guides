@@ -81,6 +81,18 @@ end
 Define the non-bang (safe) method in terms of the bang (dangerous) one if possible.
 
 ```ruby
+# bad
+class MyService
+  def call!(id)
+    MyModel.find(id)
+  end
+
+  def call(id)
+    MyModel.find_by(id: id)
+  end
+end
+
+# good
 class MyService
   def call!(id)
     MyModel.find(id)
