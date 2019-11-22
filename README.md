@@ -21,7 +21,7 @@ Credits
 
 ![Zygo](https://v.fastcdn.co/t/a849570b/f5766d1d/1569515960-40045796-118x72-logo.png)
 
-[Zygo Tecnologia](zygotecnologia.com).
+[Zygo Tecnologia](http://zygotecnologia.com).
 
 License
 -------
