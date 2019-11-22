@@ -3,51 +3,11 @@ Ruby
 
 This Ruby style guide recommends best practices so that real-world Ruby programmers can write code that can be maintained by other real-world Ruby programmers.
 
-## Bang Methods
-
-They are questions, and do not modify the object they are called on.
-
-For example:
-
-```ruby
-name = "Ruby Monstas"
-puts name.downcase
-puts name
-```
-
-This will output:
-
-```text
-ruby monstas
-Ruby Monstas
-```
-
-As you can see the method downcase has returned a new String, which is the lowercase version of the String that the method is being called on. When we output the original String on the next line, we can then see that it’s still the same: The method downcase does not modify the String.
-
-However, there also are variants of some of these methods, which end in an exclamation mark !. These methods are called “bang methods”, and they usually modify the object that they’re being called on.
-
-> Bang methods end with an exlamation mark, and often modify the object they are called on.
-
-For example, next to the method downcase Strings also have a method downcase!.
-
-Let’s try that:
-
-```ruby
-name = "Ruby Monstas"
-puts name.downcase!
-puts name
-```
-
-This will output:
-
-```text
-ruby monstas
-ruby monstas
-```
-
-As you can see calling the method downcase! on the second line has modified the String itself (the object that name refers to), and also returned the new downcased version.
-
-> Use bang methods with caution!
+## Formatting rules
+* Use soft-tabs with a two space indent.
+* Keep each line of code to a readable length. Unless you have a reason to, keep lines to fewer than 120 characters.
+* Never leave trailing whitespace.
+* End each file with a newline.
 
 ## Dangerous Method Bang
 
