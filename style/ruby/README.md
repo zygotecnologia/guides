@@ -68,7 +68,7 @@ end
 
 ## Spaces and Braces
 
-No spaces after (, [ or before ], ). Use spaces around { and before }.
+No spaces after `(`, `[` or before `]`, `)`.
 
 ```ruby
 # bad
@@ -78,20 +78,15 @@ some( arg ).other
 # good
 some(arg).other
 [1, 2, 3].each { |e| puts e }
-{ and } deserve a bit of clarification, since they are used for block and hash literals, as well as string interpolation.
 ```
 
-For hash literals two styles are considered acceptable. The first variant is slightly more readable (and arguably more popular in the Ruby community in general). The second variant has the advantage of adding visual difference between block and hash literals. Whichever one you pick - apply it consistently.
-
+For hash literals use spaces around `{` and before `}`.
 ```ruby
-# good - space after { and before }
+# good
 { one: 1, two: 2 }
-
-# good - no space after { and before }
-{one: 1, two: 2}
 ```
 
-With interpolated expressions, there should be no padded-spacing inside the braces.
+With interpolated expressions don't use spaces around `{` and before `}`.
 
 ```ruby
 # bad
@@ -101,9 +96,9 @@ With interpolated expressions, there should be no padded-spacing inside the brac
 "From: #{user.first_name}, #{user.last_name}"
 ```
 
-## No and or or
+## No `and` or `or`
 
-The and and or keywords are banned. The minimal added readability is just not worth the high probability of introducing subtle bugs. For boolean expressions, always use && and || instead. For flow control, use if and unless; && and || are also acceptable but less clear.
+The `and` and `or` keywords are banned. They aren't alias to `&&` and `||` operators, so they shouldn't be used like so. For boolean expressions, always use `&&` and `||`. For flow control, use `if` and `unless`; `&&` and `||` are also acceptable but less clear.
 
 ```ruby
 # bad
@@ -125,9 +120,9 @@ raise("Failed to save document!") unless document.save
 document.save || raise("Failed to save document!")
 ```
 
-## No Multi-line if Modifiers
+## No Multi-line `if` Modifiers
 
-Avoid modifier if/unless usage at the end of a non-trivial multi-line block.
+Avoid modifier `if`/`unless` usage at the end of a non-trivial multi-line block.
 
 ```ruby
 # bad
@@ -143,9 +138,9 @@ if some_condition
 end
 ```
 
-## %w
+## `%w`
 
-Prefer %w to the literal array syntax when you need an array of words (non-empty strings without spaces and special characters in them). Apply this rule only to arrays with two or more elements.
+Prefer `%w` to the literal array syntax when you need an array of words (non-empty strings without spaces and special characters in them). Apply this rule only to arrays with two or more elements.
 
 ```ruby
 # bad
@@ -155,9 +150,9 @@ STATES = ['draft', 'open', 'closed']
 STATES = %w[draft open closed]
 ```
 
-## %i
+## `%i`
 
-Prefer %i to the literal array syntax when you need an array of symbols (and you don’t need to maintain Ruby 1.9 compatibility). Apply this rule only to arrays with two or more elements.
+Prefer `%i` to the literal array syntax when you need an array of symbols (and you don’t need to maintain Ruby 1.9 compatibility). Apply this rule only to arrays with two or more elements.
 
 ```ruby
 # bad
@@ -181,11 +176,11 @@ hash = { one: 1, two: 2, three: 3 }
 
 ## Boolean Methods Question Mark
 
-The names of predicate methods (methods that return a boolean value) should end in a question mark (i.e. Array#empty?). Methods that don’t return a boolean, shouldn’t end in a question mark.
+The names of predicate methods (methods that return a boolean value) should end in a question mark (i.e. `Array#empty?`). Methods that don’t return a boolean, shouldn’t end in a question mark.
 
 ## Boolean Methods Prefix
 
-Avoid prefixing predicate methods with the auxiliary verbs such as is, does, or can. These words are redundant and inconsistent with the style of boolean methods in the Ruby core library, such as empty? and include?.
+Avoid prefixing predicate methods with the auxiliary verbs such as `is`, `does`, or `can`. These words are redundant and inconsistent with the style of boolean methods in the Ruby core library, such as `empty?` and `include?`.
 
 ```ruby
 # bad
@@ -219,9 +214,9 @@ class Person
 end
 ```
 
-## No for Loops
+## No `for` Loops
 
-Do not use for, unless you know exactly why. Most of the time iterators should be used instead. for is implemented in terms of each (so you’re adding a level of indirection), but with a twist - for doesn’t introduce a new scope (unlike each) and variables defined in its block will be visible outside it.
+Do not use `for`, unless you know exactly why. Most of the time iterators should be used instead. `for` is implemented in terms of `each` (so you’re adding a level of indirection), but with a twist - `for` doesn’t introduce a new scope (unlike `each`) and variables defined in its block will be visible outside it.
 
 ```ruby
 arr = [1, 2, 3]
@@ -241,9 +236,9 @@ arr.each { |elem| puts elem }
 elem # => NameError: undefined local variable or method `elem'
 ```
 
-## ! vs not
+## `!` vs `not`
 
-Use ! instead of not.
+Use `!` instead of `not`.
 
 ```ruby
 # bad - parentheses are required because of op precedence
@@ -255,7 +250,7 @@ x = !something
 
 ## No Space after Bang
 
-No space after !.
+No space after `!`.
 
 ```ruby
 # bad
@@ -282,7 +277,7 @@ f(3 + 2) + 1
 
 ### Single line blocks
 
-Prefer {...} over do...end for single-line blocks. Avoid using {...} for multi-line blocks (multiline chaining is always ugly). Always use do...end for "control flow" and "method definitions" (e.g. in Rakefiles and certain DSLs). Avoid do...end when chaining.[link]
+Prefer `{ ... }` over `do ... end` for single-line blocks. Avoid using `{ ... }` for multi-line blocks (multiline chaining is always ugly). Always use `do ... end` for "control flow" and "method definitions" (e.g. in Rakefiles and certain DSLs). Avoid `do ... end` when chaining.
 
 ```ruby
 names = ["Bozhidar", "Steve", "Sarah"]
@@ -316,7 +311,7 @@ end.map { |name| name.upcase }
 
 ### Assignment in condition
 
-Don't use the return value of = in conditionals.
+Don't use the return value of `=` in conditionals.
 
 ```ruby
 # bad - shows intended use of assignment
@@ -338,7 +333,7 @@ end
 
 ### Single action blocks
 
-When a method block takes only one argument, and the body consists solely of reading an attribute or calling one method with no arguments, use the &: shorthand. [link]
+When a method block takes only one argument, and the body consists solely of reading an attribute or calling one method with no arguments, use the `&:` shorthand.
 
 ```ruby
 # bad
@@ -352,15 +347,11 @@ bluths.select(&:blue_self?)
 
 ## Naming
 
-* Use snake_case for methods and variables.
+* Use **snake_case** for methods and variables.
 
-* Use CamelCase for classes and modules. (Keep acronyms like HTTP, RFC, XML uppercase.)
+* Use **CamelCase** for classes and modules. (Keep acronyms like HTTP, RFC, XML uppercase.)
 
-* Use SCREAMING_SNAKE_CASE for other constants.
-
-* The names of predicate methods (methods that return a boolean value) should end in a question mark. (i.e. Array#empty?).
-
-* The names of potentially "dangerous" methods (i.e. methods that modify self or the arguments, exit!, etc.) should end with an exclamation mark. Bang methods should only exist if a non-bang method exists. (More on this.)
+* Use **SCREAMING_SNAKE_CASE** for other constants.
 
 * Name throwaway variables `_`.
 
@@ -405,7 +396,7 @@ hash = {
 
 ### Array trailing comma
 
-Use a trailing comma in an Array that spans more than 1 line[link]
+Use a trailing comma in an Array that spans more than one line.
 
 ```ruby
 # good
@@ -467,7 +458,7 @@ Use always `[]` to define percent literals
 
 ## Ranges or between
 
-Use ranges or Comparable#between? instead of complex comparison logic when possible.
+Use ranges or `Comparable#between?` instead of complex comparison logic when possible.
 
 ```ruby
 # bad
@@ -500,7 +491,7 @@ Time.zone.now
 
 ## String Concatenation
 
-Avoid using String#+ when you need to construct large data chunks. Instead, use String#<<. Concatenation mutates the string instance in-place and is always faster than String#+, which creates a bunch of new string objects.
+Avoid using `String#+` when you need to construct large data chunks. Instead, use `String#<<`. Concatenation mutates the string instance in-place and is always faster than `String#+`, which creates a bunch of new string objects.
 
 ```ruby
 # bad
@@ -612,9 +603,10 @@ end
 
 ## Source Code Layout
 
-> Nearly everybody is convinced that every style but their own is ugly and unreadable. Leave out the "but their own" and they’re probably right…​
-
-— Jerry Coffin (on indentation)
+<div style="text-align: right">
+  <blockquote>Nearly everybody is convinced that every style but their own is ugly and unreadable. Leave out the "but their own" and they’re probably right...</blockquote>
+  — Jerry Coffin (on indentation)
+</div>
 
 ### Indent Conditional Assignment
 
@@ -676,9 +668,9 @@ result =
 
 ### Double Negation
 
-Avoid the use of !!.
+Avoid the use of `!!`.
 
-!! converts a value to boolean, but you don’t need this explicit conversion in the condition of a control expression; using it only obscures your intention. If you want to do a nil check, use nil? instead.
+`!!` converts a value to boolean, but you don’t need this explicit conversion in the condition of a control expression; using it only obscures your intention. If you want to do a `nil` check, use `nil?` instead.
 
 ```ruby
 # bad
