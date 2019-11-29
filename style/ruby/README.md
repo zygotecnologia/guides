@@ -164,11 +164,14 @@ STATES = %i[draft open closed]
 
 ## Symbols as Keys
 
-Prefer symbols instead of strings as hash keys.
+Prefer symbols instead of strings as hash keys. Also, avoid hashrocket syntax when defining hashes with symbols as keys and prefer hashcolon syntax instead.
 
 ```ruby
 # bad
 hash = { 'one' => 1, 'two' => 2, 'three' => 3 }
+
+# bad
+hash = { :one => 1, :two => 2, :three => 3 }
 
 # good
 hash = { one: 1, two: 2, three: 3 }
@@ -385,12 +388,12 @@ Use multi-line hashes when it makes the code more readable, and use trailing com
 
 ```ruby
 hash = {
-  :protocol => 'https',
-  :only_path => false,
-  :controller => :users,
-  :action => :set_password,
-  :redirect => @redirect_url,
-  :secret => @secret,
+  protocol: 'https',
+  only_path: false,
+  controller: :users,
+  action: :set_password,
+  redirect: @redirect_url,
+  secret: @secret,
 }
 ```
 
