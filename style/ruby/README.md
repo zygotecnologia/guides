@@ -164,17 +164,35 @@ STATES = %i[draft open closed]
 
 ## Symbols as Keys
 
-Prefer symbols instead of strings as hash keys. Also, avoid hashrocket syntax when defining hashes with symbols as keys and prefer hashcolon syntax instead.
+Prefer symbols instead of strings as hash keys, except when the use of strings are justified.
+
+```ruby
+# bad
+hash = { 'one' => 1, 'two' => 2, 'three' => 3 }
+
+# good
+hash = { one: 1, two: 2, three: 3 }
+
+# also good, symbols can't use hyphens
+hash = { "twenty-one" => 21, "twenty-two" => 22 }
+```
+
+## Hashcolon syntax over hashrocket
+
+Prefer hashcolon syntax for hash definition when every key is a symbol. Use hashrocket syntax if at least one key is not a symbol.
 
 ```ruby
 # bad
 hash = { 'one' => 1, 'two' => 2, 'three' => 3 }
 
 # bad
-hash = { :one => 1, :two => 2, :three => 3 }
+hash = { twenty: 20, "twenty-one" => 21 }
 
 # good
 hash = { one: 1, two: 2, three: 3 }
+
+# also good, symbols can't use hyphens
+hash = { "twenty" => 20, "twenty-one" => 21 }
 ```
 
 ## Boolean Methods Question Mark
