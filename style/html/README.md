@@ -84,7 +84,7 @@ HTML
 </div>
 ```
 
- * The tag **ul** is assigned to Unordered lists. **ol** is assigned to be used in **Ordered lists**.
+ * The tag **ul** is used in to Unordered lists. **ol** is used in **Ordered lists**.
 
 * Use the **main** tag to the main content of the page;
 ```html
