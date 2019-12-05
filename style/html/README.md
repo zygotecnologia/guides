@@ -77,7 +77,7 @@ HTML
 <!-- Not Recommended -->
 <h1>Post Title</h1>
 <div class="post-content">
-  <p>Primeiro parágrafo</p>
+  <p>First paragraph</p>
   <h2>
     Lorem Ipsum is simply dummy text of the printing and typesetting industry.
   </h2>
@@ -218,4 +218,3 @@ HTML
 <!-- Not Recommended -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 ```
-
