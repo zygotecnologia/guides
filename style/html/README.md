@@ -54,8 +54,7 @@ HTML
 <p><b>Lorem ipsum</b></p>
 ```
 
-* Use **span** tag only to apply styles to the contents;
-* Utilizar da tag **span** somente em casos de estilização dentro de uma outra tag de texto;
+* Use **span** tag only to apply styles inside from other text tag;
 ```html
 <!-- Recommended -->
 <p><span>Lorem ipsum</span> dolor sit amet..</p>
@@ -67,29 +66,25 @@ HTML
 * Don't use tags **h(h1, h2, h3, h4..)** outside titles and subtitles;
 ```html
 <!-- Recommended -->
-<h1>Título do post</h1>
+<h1>Post Title</h1>
 <div class="post-content">
-  <p>Primeiro parágrafo</p>
+  <p>First paragraph</p>
   <p>
-    Segundo parágrafo Segundo parágrafo Segundo parágrafo Segundo parágrafo
-    Segundo parágrafo Segundo parágrafo Segundo parágrafo Segundo parágrafo
+    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
   </p>
 </div>
 
 <!-- Not Recommended -->
-<h1>Título do post</h1>
+<h1>Post Title</h1>
 <div class="post-content">
-  <p>Primeiro parágrafo</p>
+  <p>First paragraph</p>
   <h2>
-    Segundo parágrafo Segundo parágrafo Segundo parágrafo Segundo parágrafo
-    Segundo parágrafo Segundo parágrafo Segundo parágrafo Segundo parágrafo
+    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
   </h2>
 </div>
 ```
 
-* Utilização da tag **ul** para listas não ordenadas e de **ol** para listas ordenadas;
-  * **Ordered lists**: An ordered list is used to describe an ordered collection of data. Browsers usually display an ordered list as a numbered list. Create an ordered list using the **ol** tag.
-  * **Unordered lists**: An unordered list is used to describe an unordered collection of data. Browsers usually display an unordered list as a bulleted list. Create an unordered list using the **ul** tag.
+ * The tag **ul** is used in Unordered lists. **ol** is used in **Ordered lists**.
 
 * Use the **main** tag to the main content of the page;
 ```html
@@ -97,8 +92,8 @@ HTML
 <html>
   <body>
     <main>
-      <h1>Título</h1>
-      <h2>Subtítulo</h2>
+      <h1>Title</h1>
+      <h2>Subtitle</h2>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
     </main>
   </body>
@@ -107,8 +102,8 @@ HTML
 <!-- Not Recommended-->
 <html>
   <body>
-    <h1>Título</h1>
-    <h2>Subtítulo</h2>
+    <h1>Title</h1>
+    <h2>Subtitle</h2>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
   <body>
 </html>
@@ -118,13 +113,13 @@ HTML
 ```html
 <!-- Recommended -->
 <div>
-  <label for="email">Qual é o seu e-mail?</label>
+  <label for="email">What's your e-mail?</label>
   <input type="text" id="email">
 </div>
 
 <!-- Recommended -->
 <div class="form-group">
-  <label for="email">Qual é o seu e-mail?</label>
+  <label for="email">What's your e-mail?</label>
   <div>
     <input type="text" id="email">
   </div>
@@ -132,7 +127,7 @@ HTML
 
 <!-- Not Recommended -->
 <div class="form-group">
-  <label for="email">Qual é o seu e-mail?</label>
+  <label for="email">What's your e-mail?</label>
 </div>
 <div class="form-group">
   <input type="text" id="email">
@@ -142,11 +137,11 @@ HTML
 * Always use double quotes for attributes;
 ```html
 <!-- Recommended -->
-<label for="email">Qual é o seu e-mail?</label>
+<label for="email">What's your e-mail?</label>
 <input type="text" id="email">
 
 <!-- Not recommended -->
-<label for='email'>Qual é o seu e-mail?</label>
+<label for='email'>What's your e-mail?</label>
 <input type='text' id='email'>
 ```
 
@@ -164,16 +159,16 @@ HTML
 * Headlines must be places in hierarchical order;
 ```html
 <!-- Recommended -->
-<h1>Título</h1>
-<h2>Subtítulo</h2>
+<h1>Title</h1>
+<h2>Subtitle</h2>
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-<h3>Subtítulo</h3>
-  
+<h3>Subtitle</h3>
+
 <!-- Not recommended -->
-<h3>Título</h3>
-<h2>Subtítulo</h2>
+<h3>Title</h3>
+<h2>Subtitle</h2>
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-<h1>Subtítulo</h1>
+<h1>Subtitle</h1>
 ```
 
 * Newline between tag name and content must be avoided;
@@ -223,4 +218,3 @@ HTML
 <!-- Not Recommended -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 ```
-
