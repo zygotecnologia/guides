@@ -20,16 +20,16 @@
 ```html
 <!-- Recommended -->
 <main>
-        <section>
-            <p>Lorem ipsum</p>
-        </section>
+  <section>
+    <p>Lorem ipsum</p>
+  </section>
 </main>
 
 <!-- Not Recommended -->
 <main>
-  <section>
-    <p>Lorem ipsum</p>
-  </section>
+        <section>
+            <p>Lorem ipsum</p>
+        </section>
 </main>
 ```
 
