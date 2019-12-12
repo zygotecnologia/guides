@@ -218,3 +218,60 @@ HTML
 <!-- Not Recommended -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 ```
+
+* The `<br>` tag should be used only inside a `<p>` tag, and never more than one in a row;
+```html
+<!-- Recommended -->
+<div>
+  <p>
+    lorem ipsum
+    <br>
+    dolor
+    <br>
+    sit amet
+  </p>
+</div>
+
+<!-- Not recommended -->
+<div>
+  <p>
+    lorem ipsum
+    <br><br><br>
+    dolor
+    <br><br>
+    sit amet
+  </p>
+</div>
+
+<!-- Not recommended -->
+<div>
+  <span>
+    lorem ipsum
+    <br>
+    dolor
+    <br>
+    sit amet
+  </span>
+</div>
+```
+
+* The `<br>` tag should be always alone in a new line;
+```html
+<!-- Recommended -->
+<div>
+  <p>
+    lorem ipsum
+    <br>
+    dolor
+    <br>
+    sit amet
+  </p>
+</div>
+
+<!-- Not recommended -->
+<div>
+  <p>
+    lorem ipsum <br> dolor <br> sit amet
+  </p>
+</div>
+```
