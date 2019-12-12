@@ -2,6 +2,9 @@ HTML
 ====
 ### Basic formatting rules
 
+* List and description of the usable HTML tags:
+[usable tags](USABLE_TAGS.md)
+
 * Use soft-tabs with a two space indent;
 ```html
 <!-- Recommended -->
