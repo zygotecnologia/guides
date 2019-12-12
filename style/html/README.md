@@ -1,8 +1,22 @@
-HTML
-====
-### Basic formatting rules
+# HTML Style Guide
 
-* Use soft-tabs with a two space indent;
+## 1 General
+### 1.1 General Style Rules
+
+#### 1.1.1 Use HTTPS for embedded resources where possible..
+```html
+<!-- Recommended -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+<!-- Not Recommended -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+<!-- Not Recommended -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+```
+
+### 1.2. General Formatting Rules
+#### 1.2.1 Use soft-tabs with a two space indent;
 ```html
 <!-- Recommended -->
 <main>
@@ -13,13 +27,13 @@ HTML
 
 <!-- Not Recommended -->
 <main>
-	<section>
-		<p>Lorem ipsum</p>
-	</section>
+  <section>
+    <p>Lorem ipsum</p>
+  </section>
 </main>
 ```
 
-* Use only lowercase;
+#### 1.2.2 Use only lowercase;
 ```html
 <!-- Recommended -->
 <main>
@@ -36,13 +50,73 @@ HTML
 </Main>
 ```
 
-* Never leave trailing whitespace;
+#### 1.2.3 Never leave trailing whitespace;
 
-* End each file with a newline.
+#### 1.2.4 End each file with a newline.
 
-### Other formatting rules
+#### 1.2.5 Always use double quotes for attributes;
+```html
+<!-- Recommended -->
+<label for="email">What's your e-mail?</label>
+<input type="text" id="email">
 
-* To bold text, use the **strong** tag;
+<!-- Not recommended -->
+<label for='email'>What's your e-mail?</label>
+<input type='text' id='email'>
+```
+
+#### 1.2.6 Single line comment must be placed before tag;
+```html
+<!-- Recommended -->
+<!-- TODO: Trocar este icone para o correto -->
+<i class="fab fa-accusoft"></i>
+
+<!-- Not recommended -->
+<i class="fab fa-accusoft"></i>
+<!-- TODO: Trocar este icone para o correto -->
+```
+
+#### 1.2.7 Newline between tag name and content must be avoided;
+```html
+<!-- Recommended -->
+<div>
+  <p> lorem ipsum </p>
+</div>
+
+<!-- Not recommended -->
+<div>
+
+  <p> lorem ipsum </p>
+</div>
+```
+
+#### 1.2.8 Don't omit optional closing tags;
+```html
+<!-- Recommended -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Spending money, spending bytes</title>
+  </head>
+  <body>
+    <p>Sic.</p>
+  </body>
+</html>
+
+<!-- Not recommended -->
+<!DOCTYPE html>
+<title>Saving money, saving bytes</title>
+<p>Qed.
+```
+
+### 1.3. General Meta Rules
+*Coming soon*
+
+## 2. HTML Style Rules
+#### 2.1 Use HTML5;
+* It’s recommended to use HTML, as text/html. Do not use XHTML. XHTML, as application/xhtml+xml, lacks both browser and infrastructure support and offers less room for optimization than HTML.
+
+#### 2.2 To bold text, use the **`<strong>`**;
 ```html
 <!-- Recommended -->
 <p><strong>Lorem ipsum</strong></p>
@@ -54,7 +128,7 @@ HTML
 <p><b>Lorem ipsum</b></p>
 ```
 
-* Use **span** tag only to apply styles inside from other text tag;
+#### 2.3 Use **`<span>`** only to apply styles inside from other text tag;
 ```html
 <!-- Recommended -->
 <p><span>Lorem ipsum</span> dolor sit amet..</p>
@@ -63,7 +137,7 @@ HTML
 <span>Lorem ipsum</span>
 ```
 
-* Don't use tags **h(h1, h2, h3, h4..)** outside titles and subtitles;
+#### 2.4 Don't use tags **headings tags (`<h1>`, `<h2>`, `<h3>`..)** outside titles and subtitles;
 ```html
 <!-- Recommended -->
 <h1>Post Title</h1>
@@ -84,9 +158,11 @@ HTML
 </div>
 ```
 
- * The tag **ul** is used in Unordered lists. **ol** is used in **Ordered lists**.
+#### 2.5 * The tag **`<ul>**` is used in Unordered lists. **`<ol>`** is used in **Ordered lists**;
+* **Ordered lists**: An ordered list is used to describe an ordered collection of data. Browsers usually display an ordered list as a numbered list. Create an ordered list using the **ol** tag.
+* **Unordered lists**: An unordered list is used to describe an unordered collection of data. Browsers usually display an unordered list as a bulleted list. Create an unordered list using the **ul** tag.
 
-* Use the **main** tag to the main content of the page;
+#### 2.6 Use the **`<main>`** tag to the main content of the page;
 ```html
 <!-- Recommended -->
 <html>
@@ -109,7 +185,7 @@ HTML
 </html>
 ```
 
-* **Input** and **label** tags must be in the same wrapper;
+#### 2.7 **`<input>`** and **`<label>`** tags must be in the same wrapper;
 ```html
 <!-- Recommended -->
 <div>
@@ -134,87 +210,17 @@ HTML
 </div>
 ```
 
-* Always use double quotes for attributes;
-```html
-<!-- Recommended -->
-<label for="email">What's your e-mail?</label>
-<input type="text" id="email">
-
-<!-- Not recommended -->
-<label for='email'>What's your e-mail?</label>
-<input type='text' id='email'>
-```
-
-* Single line comment must be placed before tag;
-```html
-<!-- Recommended -->
-<!-- TODO: Trocar este icone para o correto -->
-<i class="fab fa-accusoft"></i>
-
-<!-- Not recommended -->
-<i class="fab fa-accusoft"></i>
-<!-- TODO: Trocar este icone para o correto -->
-```
-
-* Headlines must be places in hierarchical order;
+#### 2.8 Headlines must be places in hierarchical order;
 ```html
 <!-- Recommended -->
 <h1>Title</h1>
 <h2>Subtitle</h2>
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
 <h3>Subtitle</h3>
-
+  
 <!-- Not recommended -->
 <h3>Title</h3>
 <h2>Subtitle</h2>
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
 <h1>Subtitle</h1>
-```
-
-* Newline between tag name and content must be avoided;
-```html
-<!-- Recommended -->
-<div>
-  <p> lorem ipsum </p>
-</div>
-
-<!-- Not recommended -->
-<div>
-
-  <p> lorem ipsum </p>
-</div>
-```
-
-* Don't omit optional closing tags;
-```html
-<!-- Recommended -->
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Spending money, spending bytes</title>
-  </head>
-  <body>
-    <p>Sic.</p>
-  </body>
-</html>
-
-<!-- Not recommended -->
-<!DOCTYPE html>
-<title>Saving money, saving bytes</title>
-<p>Qed.
-```
-
-* Use HTML5;
-  * It’s recommended to use HTML, as text/html. Do not use XHTML. XHTML, as application/xhtml+xml, lacks both browser and infrastructure support and offers less room for optimization than HTML.
-
-* Use HTTPS for embedded resources where possible..
-```html
-<!-- Recommended -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-
-<!-- Not Recommended -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-
-<!-- Not Recommended -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 ```
