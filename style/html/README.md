@@ -20,9 +20,9 @@
 ```html
 <!-- Recommended -->
 <main>
-  <section>
-    <p>Lorem ipsum</p>
-  </section>
+    <section>
+        <p>Lorem ipsum</p>
+    </section>
 </main>
 
 <!-- Not Recommended -->
@@ -158,7 +158,7 @@
 </div>
 ```
 
-#### 2.5 * The tag **`<ul>**` is used in Unordered lists. **`<ol>`** is used in **Ordered lists**;
+#### 2.5 The tag **`<ul>**` is used in Unordered lists. **`<ol>`** is used in **Ordered lists**;
 * **Ordered lists**: An ordered list is used to describe an ordered collection of data. Browsers usually display an ordered list as a numbered list. Create an ordered list using the **ol** tag.
 * **Unordered lists**: An unordered list is used to describe an unordered collection of data. Browsers usually display an unordered list as a bulleted list. Create an unordered list using the **ul** tag.
 
