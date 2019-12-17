@@ -275,3 +275,25 @@ HTML
   </p>
 </div>
 ```
+
+* Use **figure** tag and **figcaption** tag for figures with subtitles ;
+```html
+<!-- Recommended -->
+<figure>
+  <img src="pic_trulli.jpg" alt="Trulli">
+  <figcaption>Fig.1 - Trulli, Puglia, Italy.</figcaption>
+</figure>
+
+<!-- Not recommended -->
+<img src="pic_trulli.jpg" alt="Trulli">
+<p>Fig.1 - Trulli, Puglia, Italy.</p>
+```
+
+* Use **alt** attribute  for the **img** tag. The text should describe the image;
+```html
+<!-- Recommended -->
+<img src="smiley.gif" alt="Smiley face">
+
+<!-- Not recommended -->
+<img src="smiley.gif">
+```
