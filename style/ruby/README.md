@@ -708,3 +708,117 @@ if x
   # body omitted
 end
 ```
+
+## Strings
+
+Use double-quoted strings, and prefer string interpolation over string concatenation.
+
+```ruby
+# bad
+my_string = 'example'
+
+# good
+my_string = "example"
+
+# bad
+my_string = "Name: " + name
+
+# good
+my_string = "Name: #{name}"
+```
+
+## Case
+
+Indent `when` as deep as `case`.
+
+```ruby
+# bad
+case days
+  when 0
+    "Zero days"
+  when 1
+    "One day"
+  when 2
+    "Two days"
+
+# good
+case days
+when 0
+  "Zero days"
+when 1
+  "One day"
+when 2
+  "Two days"
+```
+
+## `if`/`unless`
+
+Never use `then` for multiline statements.
+Never use `unless` with `else`. Rewrite these with the positive case first.
+Don't use parentheses around the condition.
+
+```ruby
+# bad
+unless(condition) then
+  ...
+else
+  ...
+end
+
+# good
+if condition
+  ...
+else
+  ...
+end
+```
+
+## `is_a?` and `kind_of?`
+
+Don't use `===` operator, instead use `is_a?` or `kind_of?`.
+
+```ruby
+# bad
+if String === my_variable
+  "is a string"
+end
+
+# good
+if my_variable.is_a?(String)
+  "is a string"
+end
+```
+
+## Function definition
+
+### `return`
+
+Avoid `return` where not required.
+
+```ruby
+# bad
+def my_sum(a, b)
+  return a + b
+end
+
+# good
+def my_sum(a, b)
+  a + b
+end
+```
+
+### Parentheses
+
+Use parentheses when there are arguments. Omit the parentheses when the method doesn't accept any arguments.
+
+```ruby
+# bad
+def my_function()
+  ...
+end
+
+# good
+def my_function
+  ...
+end
+```
