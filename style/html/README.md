@@ -276,7 +276,7 @@ HTML
 </div>
 ```
 
-* Use **figure** tag and **figcaption** tag for figures with subtitles ;
+* Use **`<figure>`** tag and **`<figcaption>`** tag for figures with subtitles ;
 ```html
 <!-- Recommended -->
 <figure>
