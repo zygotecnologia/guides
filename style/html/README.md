@@ -289,7 +289,7 @@ HTML
 <p>Fig.1 - Trulli, Puglia, Italy.</p>
 ```
 
-* Use **alt** attribute for **img** tag. The text should describe the image;
+* Use **`alt`** attribute for **`<img>`** tag. The text should describe the image;
 ```html
 <!-- Recommended -->
 <img src="smiley.gif" alt="Smiley face">
