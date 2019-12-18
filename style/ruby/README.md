@@ -3,8 +3,9 @@ Ruby
 
 This Ruby style guide recommends best practices so that real-world Ruby programmers can write code that can be maintained by other real-world Ruby programmers.
 
-## Formatting rules
-* Use soft-tabs with a two space indent.
+## Formatting
+* Use 2 space indentation (no tabs).
+* Use an empty line between methods.
 * Keep each line of code to a readable length. Unless you have a reason to, keep lines to fewer than 120 characters.
 * Never leave trailing whitespace.
 * End each file with a newline.
