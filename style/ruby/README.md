@@ -916,6 +916,16 @@ end
 def my_function
   ...
 end
+
+# bad
+def my_function a, b
+  ...
+end
+
+# good
+def my_function(a, b)
+  ...
+end
 ```
 
 ## Exceptions
