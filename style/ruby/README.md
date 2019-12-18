@@ -533,6 +533,78 @@ paragraphs.each do |paragraph|
 end
 ```
 
+## Empty lines
+
+Insert empty lines between method definitions and between logical paragraphs inside a method.
+
+```ruby
+# bad
+def do_something
+  do_something_else
+end
+def do_something_else
+  2 + 2
+end
+
+# good
+def do_something
+  do_something_else
+end
+
+def do_something_else
+  2 + 2
+end
+
+# also bad
+def do_something
+  @foo = 'foo'
+  @bar = 'bar'
+  if @foo == @bar
+    puts 'foo is bar'
+  else
+    puts 'foo is not bar'
+  end
+  2 + 2
+end
+
+# good
+def do_something
+  @foo = 'foo'
+  @bar = 'bar'
+
+  if @foo == @bar
+    puts 'foo is bar'
+  else
+    puts 'foo is not bar'
+  end
+
+  2 + 2
+end
+```
+
+Also, avoid consecutive empty lines.
+
+```ruby
+# bad
+def do_something
+  do_something_else
+end
+
+
+def do_something_else
+  2 + 2
+end
+
+# good
+def do_something
+  do_something_else
+end
+
+def do_something_else
+  2 + 2
+end
+```
+
 ## Classes & Modules
 
 ### Consistent Classes
@@ -791,6 +863,30 @@ end
 
 ## Function definition
 
+## Optional parameters
+
+Use the options-hash as optional parameters instead of using default parameters for better argument clarification.
+Also, omit the hash declaration and brackets for simplicity.
+
+```ruby
+## bad
+def remove_member(user, skip_membership_check = false)
+  # ...
+end
+
+# elsewhere, out of the method definition context: what does `true` means here?
+remove_member(user, true)
+
+
+## good
+def remove_member(user, skip_membership_check: false)
+  # ...
+end
+
+# elsewhere, out of the method definition context: ok, now i know what it means
+remove_member(user, skip_membership_check: true)
+```
+
 ### `return`
 
 Avoid `return` where not required.
@@ -821,4 +917,52 @@ end
 def my_function
   ...
 end
+```
+
+## Exceptions
+
+Don't use exceptions for flow of control, when easily avoidable.
+
+```ruby
+# bad
+begin
+  n / d
+rescue ZeroDivisionError
+  puts "Cannot divide by 0!"
+end
+
+# good
+if d.zero?
+  puts "Cannot divide by 0!"
+else
+  n / d
+end
+```
+
+### Rescuing exceptions
+
+Do not rescue `StandardError` or its superclass `Exception`
+
+```ruby
+# bad
+begin
+  2 / 0
+rescue Exception
+  puts "Can't divide by zero"
+end
+
+# also bad
+begin
+  2 / 0
+rescue StandardError
+  puts "Can't divide by zero"
+end
+
+# good
+begin
+  2 / 0
+rescue ZeroDivisionError
+  puts "Can't divide by zero"
+end
+
 ```
