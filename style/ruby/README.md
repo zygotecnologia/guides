@@ -533,6 +533,78 @@ paragraphs.each do |paragraph|
 end
 ```
 
+## Empty lines
+
+Insert empty lines between method definitions and between logical paragraphs inside a method.
+
+```ruby
+# bad
+def do_something
+  do_something_else
+end
+def do_something_else
+  2 + 2
+end
+
+# good
+def do_something
+  do_something_else
+end
+
+def do_something_else
+  2 + 2
+end
+
+# also bad
+def do_something
+  @foo = 'foo'
+  @bar = 'bar'
+  if @foo == @bar
+    puts 'foo is bar'
+  else
+    puts 'foo is not bar'
+  end
+  2 + 2
+end
+
+# good
+def do_something
+  @foo = 'foo'
+  @bar = 'bar'
+
+  if @foo == @bar
+    puts 'foo is bar'
+  else
+    puts 'foo is not bar'
+  end
+
+  2 + 2
+end
+```
+
+Also, avoid consecutive empty lines.
+
+```ruby
+# bad
+def do_something
+  do_something_else
+end
+
+
+def do_something_else
+  2 + 2
+end
+
+# good
+def do_something
+  do_something_else
+end
+
+def do_something_else
+  2 + 2
+end
+```
+
 ## Classes & Modules
 
 ### Consistent Classes
@@ -707,6 +779,202 @@ x = 'test'
 if x
   # body omitted
 end
+```
+
+## Strings
+
+Use double-quoted strings, and prefer string interpolation over string concatenation.
+
+```ruby
+# bad
+my_string = 'example'
+
+# good
+my_string = "example"
+
+# bad
+my_string = "Name: " + name
+
+# good
+my_string = "Name: #{name}"
+```
+
+## Case
+
+Indent `when` as deep as `case`.
+
+```ruby
+# bad
+case days
+  when 0
+    "Zero days"
+  when 1
+    "One day"
+  when 2
+    "Two days"
+
+# good
+case days
+when 0
+  "Zero days"
+when 1
+  "One day"
+when 2
+  "Two days"
+```
+
+## `if`/`unless`
+
+Never use `then` for multiline statements.
+Never use `unless` with `else`. Rewrite these with the positive case first.
+Don't use parentheses around the condition.
+
+```ruby
+# bad
+unless(condition) then
+  ...
+else
+  ...
+end
+
+# good
+if condition
+  ...
+else
+  ...
+end
+```
+
+## `is_a?` and `kind_of?`
+
+Don't use `===` operator, instead use `is_a?` or `kind_of?`.
+
+```ruby
+# bad
+if String === my_variable
+  "is a string"
+end
+
+# good
+if my_variable.is_a?(String)
+  "is a string"
+end
+```
+
+## Function definition
+
+## Optional parameters
+
+Use the options-hash as optional parameters instead of using default parameters for better argument clarification.
+Also, omit the hash declaration and brackets for simplicity.
+
+```ruby
+## bad
+def remove_member(user, skip_membership_check = false)
+  # ...
+end
+
+# elsewhere, out of the method definition context: what does `true` means here?
+remove_member(user, true)
+
+
+## good
+def remove_member(user, skip_membership_check: false)
+  # ...
+end
+
+# elsewhere, out of the method definition context: ok, now i know what it means
+remove_member(user, skip_membership_check: true)
+```
+
+### `return`
+
+Avoid `return` where not required.
+
+```ruby
+# bad
+def my_sum(a, b)
+  return a + b
+end
+
+# good
+def my_sum(a, b)
+  a + b
+end
+```
+
+### Parentheses
+
+Use parentheses when there are arguments. Omit the parentheses when the method doesn't accept any arguments.
+
+```ruby
+# bad
+def my_function()
+  ...
+end
+
+# good
+def my_function
+  ...
+end
+
+# bad
+def my_function a, b
+  ...
+end
+
+# good
+def my_function(a, b)
+  ...
+end
+```
+
+## Exceptions
+
+Don't use exceptions for flow of control, when easily avoidable.
+
+```ruby
+# bad
+begin
+  n / d
+rescue ZeroDivisionError
+  puts "Cannot divide by 0!"
+end
+
+# good
+if d.zero?
+  puts "Cannot divide by 0!"
+else
+  n / d
+end
+```
+
+### Rescuing exceptions
+
+Do not rescue `StandardError` or its superclass `Exception`
+
+```ruby
+# bad
+begin
+  2 / 0
+rescue Exception
+  puts "Can't divide by zero"
+end
+
+# also bad
+begin
+  2 / 0
+rescue StandardError
+  puts "Can't divide by zero"
+end
+
+# good
+begin
+  2 / 0
+rescue ZeroDivisionError
+  puts "Can't divide by zero"
+end
+
 ```
 
 ## Ternary Operator
