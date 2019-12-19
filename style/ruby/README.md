@@ -625,7 +625,7 @@ end
 
 ### Avoid the usage of class (@@) variables
 
-Avoid the usage of class (@@) variables due to their "nasty" behavior in inheritance.
+Avoid the usage of class (`@@`) variables due to their "nasty" behavior in inheritance.
 
 ```ruby
 class Parent
