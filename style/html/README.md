@@ -84,7 +84,7 @@ HTML
 </div>
 ```
 
- * The tag **ul** is used in to Unordered lists. **ol** is used in **Ordered lists**.
+* The tag **ul** is used in to Unordered lists. **ol** is used in **Ordered lists**.
 
 * Use the **main** tag to the main content of the page;
 ```html
@@ -219,7 +219,7 @@ HTML
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 ```
 
-* For navigation block, use **nav** structure with **ul**, **li** and **a**;
+* For navigation block, use **nav** structure with **ul** ou **ol**, **li** and **a**;
 ```html
 <!-- Recommended -->
 <nav>
@@ -228,6 +228,15 @@ HTML
     <li><a href="#">Item two</a></li>
     <li><a href="#">Item three</a></li>
   </ul>
+<nav>
+
+<!-- Recommended -->
+<nav>
+  <ol>
+    <li><a href="item1">Item one</a></li>
+    <li><a href="item1/subitem1">Subitem one</a></li>
+    <li><a href="#">Item</a></li>
+  </ol>
 <nav>
 
 <!-- Not Recommended -->
