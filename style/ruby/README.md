@@ -976,3 +976,34 @@ rescue ZeroDivisionError
 end
 
 ```
+
+## Ternary Operator
+
+Ternary operator should be simple and easy to read, so use one expression per branch, and none boolean algebra.
+
+```ruby
+# bad
+result = (some_condition || another_condition) && !not_this_one ? something : something_else
+
+# bad
+some_condition ? (puts("condition is true"); call_if_true(condition)) : (puts("condition is false"))
+
+# good
+result = some_condition ? something : something_else
+```
+
+### No Nested Ternary
+
+_(to keep the simplicity spoken above)_ Ternary operators must not be nested. Prefer `if/else` constructs in these cases.
+
+```ruby
+# bad
+some_condition ? (nested_condition ? nested_something : nested_something_else) : something_else
+
+# good
+if some_condition
+  nested_condition ? nested_something : nested_something_else
+else
+  something_else
+end
+```
