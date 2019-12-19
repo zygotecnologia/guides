@@ -2,6 +2,9 @@ HTML
 ====
 ### Basic formatting rules
 
+* List and description of the usable HTML tags:
+[usable tags](USABLE_TAGS.md)
+
 * Use soft-tabs with a two space indent;
 ```html
 <!-- Recommended -->
@@ -77,14 +80,15 @@ HTML
 <!-- Not Recommended -->
 <h1>Post Title</h1>
 <div class="post-content">
-  <p>Primeiro parágrafo</p>
+  <p>First paragraph</p>
   <h2>
     Lorem Ipsum is simply dummy text of the printing and typesetting industry.
   </h2>
 </div>
 ```
 
-* The tag **ul** is used in to Unordered lists. **ol** is used in **Ordered lists**.
+
+* The tag **ul** is used in Unordered lists. **ol** is used in **Ordered lists**.
 
 * Use the **main** tag to the main content of the page;
 ```html
@@ -254,4 +258,83 @@ HTML
   <a href="#">Item two</a>
   <a href="#">Item three</a>
 <nav>
+```  
+
+* The `<br>` tag should be used only inside a `<p>` tag, and never more than one in a row;
+```html
+<!-- Recommended -->
+<div>
+  <p>
+    lorem ipsum
+    <br>
+    dolor
+    <br>
+    sit amet
+  </p>
+</div>
+
+<!-- Not recommended -->
+<div>
+  <p>
+    lorem ipsum
+    <br><br><br>
+    dolor
+    <br><br>
+    sit amet
+  </p>
+</div>
+
+<!-- Not recommended -->
+<div>
+  <span>
+    lorem ipsum
+    <br>
+    dolor
+    <br>
+    sit amet
+  </span>
+</div>
+```
+
+* The `<br>` tag should be always alone in a new line;
+```html
+<!-- Recommended -->
+<div>
+  <p>
+    lorem ipsum
+    <br>
+    dolor
+    <br>
+    sit amet
+  </p>
+</div>
+
+<!-- Not recommended -->
+<div>
+  <p>
+    lorem ipsum <br> dolor <br> sit amet
+  </p>
+</div>
+```
+
+* Use **`<figure>`** tag and **`<figcaption>`** tag for figures with subtitles ;
+```html
+<!-- Recommended -->
+<figure>
+  <img src="pic_trulli.jpg" alt="Trulli">
+  <figcaption>Fig.1 - Trulli, Puglia, Italy.</figcaption>
+</figure>
+
+<!-- Not recommended -->
+<img src="pic_trulli.jpg" alt="Trulli">
+<p>Fig.1 - Trulli, Puglia, Italy.</p>
+```
+
+* Use **`alt`** attribute for **`<img>`** tag. The text should describe the image;
+```html
+<!-- Recommended -->
+<img src="smiley.gif" alt="Smiley face">
+
+<!-- Not recommended -->
+<img src="smiley.gif">
 ```
