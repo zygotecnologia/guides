@@ -623,6 +623,26 @@ class SomeClass
 end
 ```
 
+### Avoid the usage of class (@@) variables
+
+Avoid the usage of class (@@) variables due to their "nasty" behavior in inheritance.
+
+```ruby
+class Parent
+  @@class_var = 'parent'
+
+  def self.print_class_var
+    puts @@class_var
+  end
+end
+
+class Child < Parent
+  @@class_var = 'child'
+end
+
+Parent.print_class_var # => will print "child"
+```
+
 ## Source Code Layout
 
 <div style="text-align: right">
