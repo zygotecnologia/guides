@@ -717,7 +717,7 @@ Parent.print_class_var # => will print "child"
 
 ### `def self` Class Methods
 
-Use def `self.method` to define class methods. This makes the code easier to refactor since the class name is not repeated.
+Use `self.method` to define class methods. This makes the code easier to refactor since the class name is not repeated.
 
 ```ruby
 class TestClass
