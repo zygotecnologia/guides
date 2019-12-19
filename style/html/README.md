@@ -223,7 +223,7 @@ HTML
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 ```
 
-* For navigation block, use **nav** structure with **ul** ou **ol**, **li** and **a**;
+* For navigation block, use **nav** structure with **ul** or **ol**, **li** and **a**;
 ```html
 <!-- Recommended -->
 <nav>
