@@ -338,3 +338,129 @@ HTML
 <!-- Not recommended -->
 <img src="smiley.gif">
 ```
+
+* Block, list and table elements MUST start on a new line and their children MUST be indented.
+```html
+<!-- Recommended Block -->
+<div>
+  <div>
+    <div>
+      Hello world
+    </div>
+  </div>
+</div>
+
+<!-- Not recommended Block -->
+<div>
+<div>
+<div>
+Hello World
+</div>
+</div>
+</div>
+
+<div><div><div>
+Hello World
+</div></div></div>
+
+<!-- Recommended list -->
+<ul>
+  <li> 1 </li>
+  <li> 2 </li>
+  <li> 3 </li>
+</ul>
+
+<ul>
+  <li>
+    <div>
+      1
+    </div>
+  </li>
+  <li>
+    <div>
+      2
+    </div>
+  </li>
+  <li>
+    <div>
+      3
+    </div>
+  </li>
+</ul>
+
+<!-- Not Recommended list -->
+<ul>
+<li>
+1
+</li>
+<li>
+2
+</li>
+<li>
+3
+</li>
+</ul>
+
+<ul><li>1</li>
+<li>2</li>
+<li>3</li></ul>
+
+
+<!-- Recommended Table -->
+<table>
+  <tr>
+    <th>Month</th>
+    <th>Savings</th>
+  </tr>
+  <tr>
+    <td>January</td>
+    <td>$100</td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <th>
+      <div>
+        Month
+      </div>
+    </th>
+    <th>
+      <div>
+        Savings
+      </div>
+    </th>
+  </tr>
+  <tr>
+    <td>
+      <div>
+        January
+      </div>
+    </td>
+    <td>
+      <div>
+        $100
+      </div>
+    </td>
+  </tr>
+</table>
+
+<!-- Not Recommended Table -->
+
+<table>
+<tr>
+<th>Month</th>
+<th>Savings</th>
+</tr>
+<tr>
+<td>January</td>
+<td>$100</td>
+</tr>
+</table>
+
+<table>
+  <tr><th>Month</th><th>Savings</th></tr>
+  <tr><td>January</td><td>$100</td></tr>
+</table>
+
+```
