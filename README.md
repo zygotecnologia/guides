@@ -4,7 +4,6 @@
 </div>
 
 ---
-abcdefgh
 # All Guides
 * [Style](./style)
   * [Git](./style/git)
