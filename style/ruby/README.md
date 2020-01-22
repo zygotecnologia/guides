@@ -1045,3 +1045,23 @@ else
   something_else
 end
 ```
+
+## The `||=` operator (Memoization)
+
+Instead of doing the same work every time you call a method (possibly expensive to run), you save the return value to a variable and use that instead.
+
+```ruby
+# bad
+class ApplicationController
+  def current_user
+    @current_user = User.find(...)
+  end
+end
+
+# good
+class ApplicationController
+  def current_user
+    @current_user ||= User.find(...)
+  end
+end
+```
