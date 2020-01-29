@@ -1084,3 +1084,28 @@ else
   something_else
 end
 ```
+
+### Multi-line Arrays Alignment
+
+Align the elements of array literals spanning multiple lines.
+
+```ruby
+# bad - single indent
+menu_item = %w[Spam Spam Spam Spam Spam Spam Spam Spam
+  Baked beans Spam Spam Spam Spam Spam]
+
+# bad
+menu_item =
+  %w[Spam Spam Spam Spam Spam Spam Spam Spam
+     Baked beans Spam Spam Spam Spam Spam]
+
+# good
+menu_item = %w[
+  Spam Spam Spam Spam Spam Spam Spam Spam
+  Baked beans Spam Spam Spam Spam Spam
+]
+
+# good
+menu_item = %w[Spam Spam Spam Spam Spam Spam Spam Spam
+               Baked beans Spam Spam Spam Spam Spam]
+```
