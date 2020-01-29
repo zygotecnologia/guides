@@ -333,7 +333,6 @@ def complex_thing(foo, bar)
 end
 ```
 
-
 ## Syntax
 
 
