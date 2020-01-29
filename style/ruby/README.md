@@ -294,6 +294,46 @@ f (3 + 2) + 1
 f(3 + 2) + 1
 ```
 
+## Function comments
+
+Use explanatory comments only before a method definition. This means that no comment should be written between logic to avoid confusion and lost of train of thought.
+Whenever you feel the need to add comment inside a method, that probably means this piece of code could (and should) be extracted to a new method.
+
+```ruby
+# bad
+def big_method
+  foo = bar if baz?
+  bar = foo if baz?
+
+  ## this iterator does xyz because of abc after jkl is qrs
+  foo.each do |f|
+    f.var = bar.var[0..2]
+    f.touch(:new_var_at)
+  end
+
+  bar = baz * foo
+end
+
+# good
+def big_method
+  foo = bar if baz?
+  bar = foo if baz?
+
+  complex_thing(foo, bar)
+
+  bar = baz * foo
+end
+
+## this iterator does xyz because of abc after jkl is qrs
+def complex_thing(foo, bar)
+  foo.each do |f|
+    f.var = bar.var[0..2]
+    f.touch(:new_var_at)
+  end
+end
+```
+
+
 ## Syntax
 
 
