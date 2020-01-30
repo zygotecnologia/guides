@@ -4,12 +4,12 @@
 </div>
 
 ---
-
 # All Guides
 * [Style](./style)
-  * [Ruby](./style/ruby)
   * [Git](./style/git)
   * [HTML](./style/html)
+  * [RSpec](./style/rspec)
+  * [Ruby](./style/ruby)
 
 # Chapters
 The guides are maintened by ours backend and frontend chapters, with each one responsible for some guides as below
