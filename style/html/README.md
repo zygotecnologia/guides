@@ -258,7 +258,7 @@ HTML
   <a href="#">Item two</a>
   <a href="#">Item three</a>
 <nav>
-```  
+```
 
 * The `<br>` tag should be used only inside a `<p>` tag, and never more than one in a row;
 ```html
@@ -463,4 +463,19 @@ Hello World
   <tr><td>January</td><td>$100</td></tr>
 </table>
 
+```
+
+* Use **`data-atributes`** to attribute **`Javascript`** actions.
+```html
+<!-- Recommended -->
+<button type="button" class="btn btn-primary" data-click-here> Clique Aqui </button>
+
+<!-- Recommended -->
+<button type="button" class="btn btn-primary" data-update-user="2"> Atualizar Usuário </button>
+
+<!-- Not recommended -->
+<button type="button" class="btn btn-primary js--click-here"> Clique Aqui </button>
+
+<!-- Not recommended -->
+<button type="button" class="btn btn-primary js--update-users" data-user="2"> Atualizar Usuário </button>
 ```
