@@ -3,18 +3,18 @@ Ruby
 
 This Ruby style guide recommends best practices so that real-world Ruby programmers can write code that can be maintained by other real-world Ruby programmers.
 
-- Formatting and spacing
+- [Formatting and spacing](#formatting-and-spacing)
   - File formatting
   - Spaces and Braces
   - Method calls
   - Empty lines
 
-- Naming
+- [Naming](#naming)
   - Boolean Methods Question Mark
   - Boolean Methods Prefix
   - Naming
 
-- Collections
+- [Collections](#collections)
   - `%w`
   - `%i`
   - Percent Literal Braces
@@ -25,17 +25,17 @@ This Ruby style guide recommends best practices so that real-world Ruby programm
   - Symbols as Keys
   - Hashcolon syntax over hashrocket
 
-- Operators
+- [Operators](#operators)
   - No `and` or `or`
   - `!` vs `not`
   - No Space after Bang
   - Double Negation
 
-- Strings
+- [Strings](#strings)
   - String Concatenation
   - Quotes
 
-- Conditionals
+- [Conditionals](#conditionals)
   - No Multi-line `if` Modifiers
   - Assignment in condition
   - Indent Conditional Assignment
@@ -44,14 +44,14 @@ This Ruby style guide recommends best practices so that real-world Ruby programm
   - Ternary Operator
   - No Nested Ternary
 
-- Comments
+- [Comments](#comments)
   - Function comments
 
-- Blocks
+- [Blocks](#blocks)
   - Single line blocks
   - Single action blocks
 
-- Methods
+- [Methods](#methods)
   - Dangerous Method Bang
   - Define safe using unsafe
   - Single-line Methods
@@ -59,18 +59,18 @@ This Ruby style guide recommends best practices so that real-world Ruby programm
   - `return`
   - Parentheses
 
-- Classes & Modules
+- [Classes and Modules](#classes-and-modules)
   - Consistent Classes
   - Namespace Definition
   - Indent public/private/protected
   - Avoid the usage of class (@@) variables
   - `def self` Class Methods
 
-- Exceptions
+- [Exceptions](#exceptions)
   - Control flow
   - Rescuing superclass
 
-- Etc
+- [Etc](#etc)
   - No `for` Loops
   - Ranges or between
   - No `DateTime`
@@ -934,7 +934,7 @@ def my_function(a, b)
 end
 ```
 
-# Classes & Modules
+# Classes and Modules
 ## Consistent Classes
 
 Use a consistent structure in your class definitions.
