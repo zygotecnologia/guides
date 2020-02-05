@@ -197,7 +197,7 @@ end
 
 ### Dealing with Time
 
-Always use https://github.com/travisjeffery/timecop[Timecop] instead of stubbing anything on Time or Date.
+Always use [Timecop](https://github.com/travisjeffery/timecop) instead of stubbing anything on Time or Date.
 
 ```ruby
 # bad
