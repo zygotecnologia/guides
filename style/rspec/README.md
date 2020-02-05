@@ -217,7 +217,7 @@ end
 
 ### Factories
 
-Use https://github.com/thoughtbot/factory_bot[Factory Bot] to create test data in integration tests.
+Use [Factory Bot](https://github.com/thoughtbot/factory_bot) to create test data in integration tests.
 You should very rarely have to use `ModelName.create` within an integration spec.
 Do *not* use fixtures as they are not nearly as maintainable as factories.
 
