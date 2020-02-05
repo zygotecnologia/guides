@@ -975,9 +975,9 @@ class ApplicationController
 end
 ```
 
-### Memoize `true`, `false`, or `nil` values
+### Memoize `false` or `nil` values
 
-> TL;DR: if method can return `true`, `false` or `nil`, and you want to memoize it, use `defined?(@result)` instead of `||=`.
+> TL;DR: if method can return `false` or `nil`, and you want to memoize it, use `defined?(@result)` instead of `||=`.
 
 
 Use `defined?` to see if the variable has been defined:
