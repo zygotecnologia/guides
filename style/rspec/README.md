@@ -179,7 +179,7 @@ end
 Stub HTTP requests when the code is making them.
 Avoid hitting real external services.
 
-Use https://github.com/vcr/vcr[VCR].
+Use [VCR](https://github.com/vcr/vcr).
 
 ```ruby
 # good
