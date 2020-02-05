@@ -15,7 +15,7 @@ describe '#my_method' do
 end
 ```
 
-### `#` before class method describe
+### `.` before class method describe
 Add a `.` before the method name when describing class methods.
 
 ```ruby
