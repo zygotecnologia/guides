@@ -1065,3 +1065,53 @@ class ApplicationController
   end
 end
 ```
+
+### Memoize `true`, `false`, or `nil` values
+
+> TL;DR: if method can return `true`, `false` or `nil`, and you want to memoize it, use `defined?(@result)` instead of `||=`.
+
+
+Use `defined?` to see if the variable has been defined:
+
+```ruby
+def users_with_discounts
+  return @users_with_discounts if defined? @users_with_discounts
+  @users_with_discounts = expensive_way_to_calculate
+end
+```
+
+`defined?` will return `nil` if the variable hasn't been defined, or the string `"instance_variable"` otherwise:
+
+```ruby
+irb(main):001:0> defined? @users_with_discounts
+=> nil
+irb(main):002:0> @users_with_discounts = expensive_way_to_calculate
+=> 42
+irb(main):003:0> defined? @users_with_discounts
+=> "instance-variable"
+```
+
+### Dealing with methods with parameters
+
+We have some memoization patterns that work well for simple accessors. *But what if you want to memoize a method that takes parameters, like this one?*
+
+```ruby
+class City < ActiveRecord::Base
+  def self.top_cities(order_by)
+    where(top_city: true).order(order_by).to_a
+  end
+end
+```
+
+So, if you wanted to memoize this method, you could do something like:
+
+```ruby
+class City < ActiveRecord::Base
+  def self.top_cities(order_by)
+    @top_cities ||= Hash.new do |h, key|
+      h[key] = where(top_city: true).order(key).to_a
+    end
+    @top_cities[order_by]
+  end
+end
+```
