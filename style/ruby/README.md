@@ -32,7 +32,8 @@ This Ruby style guide recommends best practices so that real-world Ruby programm
   - Double Negation
 
 - [Strings](#strings)
-  - String Concatenation
+  - String concatenation
+  - String interpolation
   - Quotes
 
 - [Conditionals](#conditionals)
@@ -482,7 +483,7 @@ end
 
 
 # Strings
-## String Concatenation
+## String concatenation
 
 Avoid using `String#+` when you need to construct large data chunks. Instead, use `String#<<`. Concatenation mutates the string instance in-place and is always faster than `String#+`, which creates a bunch of new string objects.
 
@@ -504,9 +505,28 @@ paragraphs.each do |paragraph|
 end
 ```
 
+## String interpolation
+
+Prefer string interpolation over string concatenation for performance reasons, but never use interpolation inside interpolation.
+
+```ruby
+# bad
+my_string = "Name: " + name
+
+# good
+my_string = "Name: #{name}"
+
+# bad
+label = "Location: #{user.brazilian? ? "BR - #{user.state}" : "Other"}"
+
+# good
+location = user.brazilian? ? "BR - #{user.state}" : "Other"
+label = "Location: #{localtion}"
+```
+
 ## Quotes
 
-Use double-quoted strings, and prefer string interpolation over string concatenation.
+Use double-quoted strings, except when a double quote is necessary inside the string. This means you should avoid escaping characters.
 
 ```ruby
 # bad
@@ -516,10 +536,10 @@ my_string = 'example'
 my_string = "example"
 
 # bad
-my_string = "Name: " + name
+my_string = "This is \"My String\"!!!"
 
 # good
-my_string = "Name: #{name}"
+my_string = 'This is "My String"!!!'
 ```
 
 # Conditionals
