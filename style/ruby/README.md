@@ -1076,6 +1076,7 @@ Use `defined?` to see if the variable has been defined:
 ```ruby
 def users_with_discounts?
   return @users_with_discounts if defined? @users_with_discounts
+
   @users_with_discounts = expensive_way_to_calculate
 end
 ```
