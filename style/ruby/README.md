@@ -1094,7 +1094,7 @@ irb(main):003:0> defined? @users_with_discounts
 
 ### Dealing with methods with parameters
 
-We have some memoization patterns that work well for simple accessors. *But what if you want to memoize a method that takes parameters, like this one?*
+If you want to memoize a method that takes parameters, like this one:
 
 ```ruby
 class City < ActiveRecord::Base
@@ -1104,15 +1104,16 @@ class City < ActiveRecord::Base
 end
 ```
 
-So, if you wanted to memoize this method, you could do something like:
+You could do something like:
 
 ```ruby
 class City < ActiveRecord::Base
   def self.top_cities(order_by)
-    @top_cities ||= Hash.new do |h, key|
-      h[key] = where(top_city: true).order(key).to_a
-    end
-    @top_cities[order_by]
+    return @top_cities[order_by] if defined? @top_cities[order_by]
+
+    @top_cities[order_by] = where(top_city: true).order(order_by).to_a
   end
 end
 ```
+
+**And no matter what you pass into `order_by`, the correct result will get memoized.** Since it's only called when the key doesn't exist, you don't have to worry about the result being `nil` or `false`.
