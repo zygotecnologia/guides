@@ -1074,7 +1074,7 @@ end
 Use `defined?` to see if the variable has been defined:
 
 ```ruby
-def users_with_discounts
+def users_with_discounts?
   return @users_with_discounts if defined? @users_with_discounts
   @users_with_discounts = expensive_way_to_calculate
 end
@@ -1086,7 +1086,7 @@ end
 irb(main):001:0> defined? @users_with_discounts
 => nil
 irb(main):002:0> @users_with_discounts = expensive_way_to_calculate
-=> 42
+=> false
 irb(main):003:0> defined? @users_with_discounts
 => "instance-variable"
 ```
