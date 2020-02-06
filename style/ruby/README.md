@@ -1255,7 +1255,10 @@ DateTime.now
 Time.now
 
 # good
-Time.zone.now or Time.current
+Time.zone.now
+
+# good
+Time.current
 ```
 
 ## `is_a?` and `kind_of?`
