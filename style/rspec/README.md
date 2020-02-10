@@ -195,7 +195,7 @@ context 'with unauthorized access' do
 end
 ```
 
-### Dealing with Time
+### Deal with time using Timecop
 
 Always use [Timecop](https://github.com/travisjeffery/timecop) instead of stubbing anything on Time or Date.
 
@@ -213,6 +213,41 @@ it 'offsets the time 2 days into the future' do
     expect(subject.get_offset_time).to eq 2.days.from_now
   end
 end
+```
+
+### Calendar boundaries
+
+Prefer the usage of methods such as `beginning_of_` and `end_of_` when dealing with calendar boundaries.
+
+```
+ruby
+# bad
+before { Timecop.travel(Time.zone.now.change(month: 1, day: 1)) }
+
+# good
+before { Timecop.travel(Time.zone.now.beginning_of_year) }
+
+# bad
+before { Timecop.travel(1.day.ago.change(hour: 23, minute: 59, second: 59)) }
+
+# good
+before { Timecop.travel(1.day.ago.end_of_day) }
+```
+
+### Hardcoding dates
+
+Always use `Time.zone.now.change` to hardcode dates instead of `Time.zone.parse` to improve code readability.
+Also, avoid hardcoding unnecessary attributes for the same reason.
+
+```ruby
+# bad
+before { Timecop.travel(Time.zone.parse("2020/02/10 20:15")) }
+
+# also bad if hour and minute are irrelevant
+before { Timecop.travel(Time.zone.now.change(year: 2020, month: 2, day: 10, hour: 20, minute: 15 )) }
+
+# good
+before { Timecop.travel(Time.zone.now.change(year: 2020, month: 2, day: 10)) }
 ```
 
 ### Factories
