@@ -219,8 +219,7 @@ end
 
 Prefer the usage of methods such as `beginning_of_` and `end_of_` when dealing with calendar boundaries.
 
-```
-ruby
+```ruby
 # bad
 before { Timecop.travel(Time.zone.now.change(month: 1, day: 1)) }
 
