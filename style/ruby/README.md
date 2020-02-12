@@ -1256,6 +1256,9 @@ Time.now
 
 # good
 Time.zone.now
+
+# good
+Time.current
 ```
 
 ## `is_a?` and `kind_of?`
