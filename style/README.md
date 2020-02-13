@@ -9,6 +9,8 @@ The entire team should contribute with this repo, giving suggestions and making 
 
 We have the following more detailed style guides:
 
-* [Ruby](ruby)
 * [Git](git)
 * [HTML](html)
+* [Rails](rails)
+* [RSpec](rspec)
+* [Ruby](ruby)
