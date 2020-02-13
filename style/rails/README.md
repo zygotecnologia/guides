@@ -67,6 +67,24 @@ validates_length_of :email, maximum: 100
 validates :email, presence: true, length: { maximum: 100 }
 ```
 
+### Never use `default_scope`
+
+Never, under any circunstance, define an `default_scope` inside an model, as it makes debugging much harder.
+But if you stumble upon a model that already has an `default_scope` defined, do not remove it, as it will much probably
+break a lot of code
+
+```ruby
+# bad - if it's you the one who's adding it
+class Order < ActiveRecord::Base
+  default_scope { where.not(status: :cancelled) }
+end
+
+# good
+class Order < ActiveRecord::Base
+  scope :not_cancelled { where.not(status: :cancelled) }
+end
+```
+
 ## ActiveRecord Queries
 
 ### Avoid interpolation
@@ -80,7 +98,6 @@ User.where("name LIKE %#{params[:partial_name]}%")
 # good
 User.where("name LIKE ?", "%#{params[:partial_name]}%")
 ```
-
 
 ### `size` over `count`
 
