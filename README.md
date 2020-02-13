@@ -8,6 +8,7 @@
 * [Style](./style)
   * [Git](./style/git)
   * [HTML](./style/html)
+  * [Rails](./style/rails)
   * [RSpec](./style/rspec)
   * [Ruby](./style/ruby)
 
