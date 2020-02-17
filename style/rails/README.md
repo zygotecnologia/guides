@@ -8,7 +8,8 @@ This Rails style guide recommends best practices so that real-world Rails progra
 
 ### Enums
 
-Prefer using the hash syntax for `enum`. Array makes the database values implicit & any insertion/removal/rearrangement of values in the middle will most probably lead to broken code. It also makes it easier to identify the key-value pair
+Prefer using the hash syntax for `enum`. Array makes the database values implicit and any insertion/removal/rearrangement of values in the middle will most probably lead to broken code.
+It also makes it easier to identify the key-value pair.
 
 ```ruby
 class Transaction < ActiveRecord::Base
@@ -25,7 +26,8 @@ end
 
 ### `has_many :through`
 
-Prefer `has_many :through` to `has_and_belongs_to_many` when dealing with many-to-many associations. Using `has_many :through` allows additional attributes and validations on the join model.
+Prefer `has_many :through` to `has_and_belongs_to_many` when dealing with many-to-many associations.
+Using `has_many :through` allows additional attributes and validations on the join model.
 
 ```ruby
 # bad
@@ -70,8 +72,7 @@ validates :email, presence: true, length: { maximum: 100 }
 ### Never use `default_scope`
 
 Never, under any circunstance, define an `default_scope` inside an model, as it makes debugging much harder.
-But if you stumble upon a model that already has an `default_scope` defined, do not remove it, as it will much probably
-break a lot of code
+But if you stumble upon a model that already has an `default_scope` defined, do not remove it, as it will much probably break a lot of code.
 
 ```ruby
 # bad - if it's you the one who's adding it
@@ -101,7 +102,10 @@ User.where("name LIKE ?", "%#{params[:partial_name]}%")
 
 ### `size` over `count`
 
-When querying Active Record collections, prefer `size` or `length` over `count`. Using `length` will load the collection in memory and then count the elements in the array. As for `size`, it will decide to execute `length` or `count`, depending on whether the collection is already loaded or not. `count` will ALWAYS execute an SQL query when called in an ActiveRecord object.
+When querying Active Record collections, prefer `size` or `length` over `count`.
+Using `length` will load the collection in memory and then count the elements in the array.
+As for `size`, it will decide to execute `length` or `count`, depending on whether the collection is already loaded or not.
+`count` will ALWAYS execute an SQL query when called in an ActiveRecord object.
 
 ```ruby
 # bad
