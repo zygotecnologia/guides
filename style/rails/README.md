@@ -189,25 +189,25 @@ When you need to add more actions to a RESTful resource, use member and collecti
 
 ```ruby
 # bad
-get 'subscriptions/:id/unsubscribe'
+get "subscriptions/:id/unsubscribe"
 resources :subscriptions
 
 # bad - use block syntax instead
 resources :subscriptions do
-  get 'unsubscribe', on: :member
+  get "unsubscribe", on: :member
 end
 
 # good
 resources :subscriptions do
   member do
-    get 'unsubscribe'
+    get "unsubscribe"
   end
 end
 
 # good
 resources :photos do
   collection do
-    get 'search'
+    get "search"
   end
 end
 ```
