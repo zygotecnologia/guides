@@ -121,7 +121,7 @@ User.all.length
 Use `change` instead of `up` and `down` to create new migrations, but watch out for non-reversible migration commands.
 For instance, simply calling `drop_table` inside a `change` will break since ActiveRecord doesn't know what to do in a rollback.
 For these special cases, use `up` and `down` to explicitly tell ActiveRecord what to do. All reversible commands can be found
-in (CommandRecorder Docs)[https://api.rubyonrails.org/classes/ActiveRecord/Migration/CommandRecorder.html]
+in [CommandRecorder Docs](https://api.rubyonrails.org/classes/ActiveRecord/Migration/CommandRecorder.html)
 
 ```ruby
 # bad
