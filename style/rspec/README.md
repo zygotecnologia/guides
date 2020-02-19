@@ -4,44 +4,44 @@ RSpec
 Behaviour Driven Development for Ruby. Making TDD Productive and Fun.
 
 - Naming
-### `#` before instance method describe
-### `.` before class method describe
-### Avoid `should` on spec description
-### Keep your description short
-### Context Descriptions
-### Example Descriptions
+  - `#` before instance method describe
+  - `.` before class method describe
+  - Avoid `should` on spec description
+  - Keep your description short
+  - Context Descriptions
+  - Example Descriptions
 
 - Variables
-### Instance Variables
-### Leading subject
-### Needed Data
+  - Instance Variables
+  - Leading subject
+  - Needed Data
 
 - Dealing with dates and time
-### Deal with time using Timecop
-### Calendar boundaries
-### Hardcoding dates
+  - Deal with time using Timecop
+  - Calendar boundaries
+  - Hardcoding dates
 
 - Matchers and predicates
-### `not_to` vs `to_not`
-### Built-in matchers
-### Predicate Matchers
-### Use `expect` instead of `should` syntax
-### Expect a call to change something
+  - `not_to` vs `to_not`
+  - Built-in matchers
+  - Predicate Matchers
+  - Use `expect` instead of `should` syntax
+  - Expect a call to change something
 
 - `before`/`after`
-### `before`/`after` that are not for each it
-### Redundant `before(:each)`
+  - `before`/`after` that are not for each it
+  - Redundant `before(:each)`
 
 - Code organization
-### Context Cases
-### Single expectation test
-### Use contexts
-### Shared Examples
-### Empty lines
+  - Context Cases
+  - Single expectation test
+  - Use contexts
+  - Shared Examples
+  - Empty lines
 
 - Etc
-### Stub HTTP Requests
-### Factories
+  - Stub HTTP Requests
+  - Factories
 
 ## Naming
 
