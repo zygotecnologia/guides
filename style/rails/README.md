@@ -117,3 +117,101 @@ User.all.size
 # good - if you really need to load all users into memory
 User.all.length
 ```
+
+# Migrations
+
+## Non-reversible migrations
+
+Use `change` instead of `up` and `down` to create new migrations, but watch out for non-reversible migration commands.
+For instance, simply calling `drop_table` inside a `change` will break since ActiveRecord doesn't know what to do in a rollback.
+For these special cases, use `up` and `down` to explicitly tell ActiveRecord what to do. All reversible commands can be found
+in [CommandRecorder Docs](https://api.rubyonrails.org/classes/ActiveRecord/Migration/CommandRecorder.html)
+
+```ruby
+# bad
+class AddNameToUsers < ActiveRecord::Migration
+  def up
+    add_column :users, :name, :string
+  end
+
+  def down
+    remove_column :users, :name, :string
+  end
+end
+
+# good - ActiveRecord knows how to rollback
+class AddNameToUsers < ActiveRecord::Migration
+  def change
+    add_column :users, :name, :string
+  end
+end
+
+# bad - ActiveRecord breaks when rolling back
+class DropUsers < ActiveRecord::Migration
+  def change
+    drop_table :users
+  end
+end
+
+# good - Now ActiveRecord can rollback
+class DropUsers < ActiveRecord::Migration
+  def up
+    drop_table :users
+  end
+
+  def down
+    create_table :users do |t|
+      t.string :name
+    end
+  end
+end
+```
+
+# ActiveSupport Core Extensions
+
+## Safe Navigator over `try!`
+
+Prefer the safe navigator operand (`&.`) over `try!` when nil-checking the left side of an operand.
+`try!` is used to protect the right side of an operand, when the left-side is not nil.
+
+```ruby
+# bad if obj coulbe be nil
+obj.try! :fly
+
+# good
+obj&.fly
+
+# good if `obj` is not nil and may or may not have the method `bark`
+obj.try! :bark
+```
+
+# Routing
+
+## Member collection rules
+
+When you need to add more actions to a RESTful resource, use member and collection routes with block syntax.
+
+```ruby
+# bad
+get "subscriptions/:id/unsubscribe"
+resources :subscriptions
+
+# bad - use block syntax instead
+resources :subscriptions do
+  get "unsubscribe", on: :member
+end
+
+# good
+resources :subscriptions do
+  member do
+    get "unsubscribe"
+  end
+end
+
+# good
+resources :photos do
+  collection do
+    get "search"
+  end
+end
+```
