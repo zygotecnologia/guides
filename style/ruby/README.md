@@ -12,7 +12,8 @@ This Ruby style guide recommends best practices so that real-world Ruby programm
 - [Naming](#naming)
   - Boolean Methods Question Mark
   - Boolean Methods Prefix
-  - Naming
+  - Casing
+  - Memoized Instance Variable
 
 - [Collections](#collections)
   - `%w`
@@ -259,6 +260,31 @@ end
   major_version, minor_version, _ = version.split('.')
   ```
 
+## Memoized Instance Variable
+
+Memoized instance variable must match the method name, for avoiding confusion and bugs.
+
+```ruby
+# bad
+def foo
+  @something ||= calculate_expensive_thing
+end
+
+# bad
+def _foo
+  @foo ||= calculate_expensive_thing
+end
+
+# bad
+def foo
+  @_foo ||= calculate_expensive_thing
+end
+
+# good
+def foo
+  @foo ||= calculate_expensive_thing
+end
+```
 
 # Collections
 ## `%w`
