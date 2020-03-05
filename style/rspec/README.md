@@ -345,7 +345,7 @@ end
 
 
 ### Use `expect` instead of `should` syntax
-On new projects always use the expect syntax.
+Always use the expect syntax.
 
 ``` ruby
 # BAD
