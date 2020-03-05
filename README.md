@@ -4,12 +4,15 @@
 </div>
 
 ---
-# All Guides (Still under construction)
+
+
+
+# All Guides
 * [Style](./style)
-  * [Git](./style/git)
+  * [Git](./style/git) (under construction 🚜)
   * [HTML](./style/html)
-  * [Rails](./style/rails)
-  * [RSpec](./style/rspec)
+  * [Rails](./style/rails) (under construction 🚧)
+  * [RSpec](./style/rspec) (under construction 🏗)
   * [Ruby](./style/ruby)
 
 # Chapters
