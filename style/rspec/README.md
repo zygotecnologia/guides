@@ -3,8 +3,47 @@ RSpec
 
 Behaviour Driven Development for Ruby. Making TDD Productive and Fun.
 
-### `not_to` vs `to_not`
-Write `not_to`. `to_not` leads to a [split infinitive](https://en.wikipedia.org/wiki/Split_infinitive), a not-so-pleasant grammatical construct.
+- Naming
+  - `#` before instance method describe
+  - `.` before class method describe
+  - Avoid `should` on spec description
+  - Keep your description short
+  - Context Descriptions
+  - Example Descriptions
+
+- Variables
+  - Instance Variables
+  - Leading subject
+  - Needed Data
+
+- Dealing with dates and time
+  - Deal with time using Timecop
+  - Calendar boundaries
+  - Hardcoding dates
+
+- Matchers and predicates
+  - `not_to` vs `to_not`
+  - Built-in matchers
+  - Predicate Matchers
+  - Use `expect` instead of `should` syntax
+  - Expect a call to change something
+
+- `before`/`after`
+  - `before`/`after` that are not for each it
+  - Redundant `before(:each)`
+
+- Code organization
+  - Context Cases
+  - Single expectation test
+  - Use contexts
+  - Shared Examples
+  - Empty lines
+
+- Etc
+  - Stub HTTP Requests
+  - Factories
+
+## Naming
 
 ### `#` before instance method describe
 Add a `#` before the method name when describing instance methods.
@@ -51,36 +90,6 @@ context 'when not valid' do
 end
 ```
 
-### Built-in matchers
-Use built-in matchers. This includes usage of shoulda-matchers.
-
-```ruby
-# bad
-it 'includes a title' do
-  expect(article.title.include?('a lengthy title')).to be true
-end
-
-# good
-it 'includes a title' do
-  expect(article.title).to include 'a lengthy title'
-end
-```
-
-### Predicate Matchers
-Use RSpec’s predicate matcher methods when possible.
-
-```ruby
-# bad
-it 'is published' do
-  expect(subject.published?).to be true
-end
-
-# good
-it 'is published' do
-  expect(subject).to be_published
-end
-```
-
 ### Context Descriptions
 
 Context descriptions should describe the conditions shared by all the examples within. Full example names (formed by concatenation of all nested block descriptions) should form a readable sentence.
@@ -109,91 +118,113 @@ describe 'Summary' do
 end
 ```
 
-### Context Cases
 
-`context` blocks should pretty much always have an opposite negative case.
-It is a code smell if there is a single context (without a matching negative case), and this code needs refactoring, or may have no purpose.
+### Example Descriptions
+`it` block descriptions should never end with a conditional. This is a code smell that the it most likely needs to be wrapped in a context.
 
 ```ruby
-# bad - needs refactoring
-describe '#attributes' do
-  context 'the returned hash' do
-    it 'includes the display name' do
-      # ...
-    end
-
-    it 'includes the creation time' do
-      # ...
-    end
-  end
-end
-
-# bad - the negative case needs to be tested, but isn't
-describe '#attributes' do
-  context 'when display name is present' do
-    before do
-      subject.display_name = 'something'
-    end
-
-    it 'includes the display name' do
-      # ...
-    end
-  end
+# bad
+it 'returns the display name if it is present' do
+  # ...
 end
 
 # good
-describe '#attributes' do
-  subject { FactoryBot.create(:article) }
-
-  specify do
-    expect(subject.attributes).to include subject.display_name
-    expect(subject.attributes).to include subject.created_at
+context 'when display name is present' do
+  it 'returns the display name' do
+    # ...
   end
 end
 
-describe '#attributes' do
-  context 'when display name is present' do
-    before do
-      subject.display_name = 'something'
-    end
-
-    it 'includes the display name' do
-      # ...
-    end
-  end
-
-  context 'when display name is not present' do
-    before do
-      subject.display_name = nil
-    end
-
-    it 'does not include the display name' do
-      # ...
-    end
+# This encourages the addition of negative test cases that might have
+# been overlooked
+context 'when display name is not present' do
+  it 'returns nil' do
+    # ...
   end
 end
 ```
 
-### Stub HTTP Requests
 
-Stub HTTP requests when the code is making them.
-Avoid hitting real external services.
 
-Use [VCR](https://github.com/vcr/vcr).
+
+## Variables
+
+### Instance Variables
+
+Use `let` definitions instead of instance variables.
 
 ```ruby
+# bad
+before { @name = 'John Wayne' }
+
+it 'reverses a name' do
+  expect(reverser.reverse(@name)).to eq('enyaW nhoJ')
+end
+
 # good
-context 'with unauthorized access' do
-  let(:uri) { 'http://api.lelylan.com/types' }
+let(:name) { 'John Wayne' }
 
-  before { stub_request(:get, uri).to_return(status: 401, body: fixture('401.json')) }
+it 'reverses a name' do
+  expect(reverser.reverse(name)).to eq('enyaW nhoJ')
+end
+```
 
-  it 'returns access denied' do
-    page.driver.get uri
-    expect(page).to have_content 'Access denied'
+
+
+
+### Leading subject
+When subject is used, it should be the first declaration in the example group.
+
+```ruby
+# bad
+describe Article do
+  before do
+    # ...
+  end
+
+  let(:user) { FactoryBot.create(:user) }
+  subject { FactoryBot.create(:some_article) }
+
+  describe '#summary' do
+    # ...
+  end
+end
+
+# good
+describe Article do
+  subject { FactoryBot.create(:some_article) }
+  let(:user) { FactoryBot.create(:user) }
+
+  before do
+    # ...
+  end
+
+  describe '#summary' do
+    # ...
   end
 end
 ```
+
+### Needed Data
+Do not load more data than needed to test your code.
+
+```ruby
+# good
+RSpec.describe User do
+  describe ".top" do
+    subject { described_class.top(2) }
+
+    before { FactoryBot.create_list(:user, 3) }
+
+    it { is_expected.to have(2).items }
+  end
+end
+```
+
+
+
+## Dealing with dates and time
+
 
 ### Deal with time using Timecop
 
@@ -249,26 +280,91 @@ before { Timecop.travel(Time.zone.now.change(year: 2020, month: 2, day: 10, hour
 before { Timecop.travel(Time.zone.now.change(year: 2020, month: 2, day: 10)) }
 ```
 
-### Factories
 
-Use [Factory Bot](https://github.com/thoughtbot/factory_bot) to create test data in integration tests.
-You should very rarely have to use `ModelName.create` within an integration spec.
-Do *not* use fixtures as they are not nearly as maintainable as factories.
+## Matchers and predicates
+
+
+### Built-in matchers
+Use built-in matchers. This includes usage of shoulda-matchers.
 
 ```ruby
 # bad
-subject(:article) do
-  Article.create(
-    title: 'Piccolina',
-    author: 'John Archer',
-    published_at: '17 August 2172',
-    approved: true
-  )
+it 'includes a title' do
+  expect(article.title.include?('a lengthy title')).to be true
 end
 
 # good
-subject(:article) { FactoryBot.create(:article) }
+it 'includes a title' do
+  expect(article.title).to include 'a lengthy title'
+end
 ```
+
+### Predicate Matchers
+Use RSpec’s predicate matcher methods when possible.
+
+```ruby
+# bad
+it 'is published' do
+  expect(subject.published?).to be true
+end
+
+# good
+it 'is published' do
+  expect(subject).to be_published
+end
+```
+
+
+### `not_to` vs `to_not`
+Write `not_to`. `to_not` leads to a [split infinitive](https://en.wikipedia.org/wiki/Split_infinitive), a not-so-pleasant grammatical construct.
+
+
+
+### Expect a call to change something
+Prefer `expect { ... }.to change { ... }.by(x)` syntax.
+
+```ruby
+# bad
+it 'publishes the article' do
+  article.publish
+
+  expect(Article.count).to eq(2)
+end
+
+# bad
+it 'publishes the article' do
+  expect { article.publish }.to change(Article, :count).by(1)
+end
+
+# good
+it 'publishes the article' do
+  expect { article.publish }.to change { Article.count }.by(1)
+end
+```
+
+
+
+### Use `expect` instead of `should` syntax
+Always use the expect syntax.
+
+``` ruby
+# BAD
+
+it 'creates a resource' do
+  response.should respond_with_content_type(:json)
+end
+
+# GOOD
+
+it 'creates a resource' do
+  expect(response).to respond_with_content_type(:json)
+end
+```
+
+
+
+## `before`/`after`
+
 
 ### `before`/`after` that are not for each it
 
@@ -299,218 +395,8 @@ describe '#summary' do
 end
 ```
 
-### Instance Variables
 
-Use `let` definitions instead of instance variables.
-
-```ruby
-# bad
-before { @name = 'John Wayne' }
-
-it 'reverses a name' do
-  expect(reverser.reverse(@name)).to eq('enyaW nhoJ')
-end
-
-# good
-let(:name) { 'John Wayne' }
-
-it 'reverses a name' do
-  expect(reverser.reverse(name)).to eq('enyaW nhoJ')
-end
-```
-
-### Empty lines
-
-- Group `let`, `subject` blocks and separate them from `before`/`after` blocks.
-- Leave one empty line between `feature`, `context` or `describe` blocks.
-- Leave one empty line around `it` blocks. This helps to separate the expectations from their conditional logic (contexts for instance).
-
-```ruby
-# bad
-describe Article do
-  subject { FactoryBot.create(:some_article) }
-  let(:user) { FactoryBot.create(:user) }
-  before do
-    # ...
-  end
-  after do
-    # ...
-  end
-  describe '#summary' do
-    it 'something' do
-    end
-    it 'something' do
-    end
-  end
-  describe '#summary' do
-    it 'something' do
-    end
-    it 'something' do
-    end
-  end
-end
-
-# good
-describe Article do
-  subject { FactoryBot.create(:some_article) }
-  let(:user) { FactoryBot.create(:user) }
-
-  before do
-    # ...
-  end
-
-  after do
-    # ...
-  end
-
-  describe '#summary' do
-    it 'something' do
-    end
-
-    it 'something' do
-    end
-  end
-
-  describe '#summary' do
-    it 'something' do
-    end
-
-    it 'something' do
-    end
-  end
-end
-```
-
-### Single expectation test
-
-The 'one expectation' tip is more broadly expressed as 'each test should make only one assertion'.
-This helps you on finding possible errors, going directly to the failing test, and to make your code readable.
-
-Except for tests that are not isolated: feature specs, mainly the ones that use JS; and services that make requests to external APIs.
-Specs that just use the database do not fall into this exception.
-
-```ruby
-# bad
-it 'does the thing' do
-  expect(service.call).to be_truthy
-  expect(Thing.last.done?).to be_truthy
-end
-
-# good
-it { is_expected.to respond_with_content_type(:json) }
-it { is_expected.to assign_to(:resource) }
-
-# good (not isolated)
-it 'does the thing' do
-  click_on "Do it"
-  expect(Thing.last.done?).to be_truthy
-  click_on "Undo it"
-  expect(Thing.last.done?).to be_falsy
-end
-```
-
-### Needed Data
-Do not load more data than needed to test your code.
-
-```ruby
-# good
-RSpec.describe User do
-  describe ".top" do
-    subject { described_class.top(2) }
-
-    before { FactoryBot.create_list(:user, 3) }
-
-    it { is_expected.to have(2).items }
-  end
-end
-```
-
-### Use `expect` instead of `should` syntax
-On new projects always use the expect syntax.
-
-``` ruby
-# BAD
-
-it 'creates a resource' do
-  response.should respond_with_content_type(:json)
-end
-
-# GOOD
-
-it 'creates a resource' do
-  expect(response).to respond_with_content_type(:json)
-end
-```
-
-### Use contexts
-Contexts are a powerful method to make your tests clear and well organized. In the long term this practice will keep tests easy to read.
-
-```ruby
-# BAD
-it 'has 200 status code if logged in' do
-  expect(response).to respond_with 200
-end
-
-it 'has 401 status code if not logged in' do
-  expect(response).to respond_with 401
-end
-
-# GOOD
-context 'when logged in' do
-  it { is_expected.to respond_with 200 }
-end
-
-context 'when logged out' do
-  it { is_expected.to respond_with 401 }
-end
-```
-
-### Example Descriptions
-`it` block descriptions should never end with a conditional. This is a code smell that the it most likely needs to be wrapped in a context.
-
-```ruby
-# bad
-it 'returns the display name if it is present' do
-  # ...
-end
-
-# good
-context 'when display name is present' do
-  it 'returns the display name' do
-    # ...
-  end
-end
-
-# This encourages the addition of negative test cases that might have
-# been overlooked
-context 'when display name is not present' do
-  it 'returns nil' do
-    # ...
-  end
-end
-```
-
-### Expect a call to change something
-Prefer `expect { ... }.to change { ... }.by(x)` syntax.
-
-```ruby
-# bad
-it 'publishes the article' do
-  article.publish
-
-  expect(Article.count).to eq(2)
-end
-
-# bad
-it 'publishes the article' do
-  expect { article.publish }.to change(Article, :count).by(1)
-end
-
-# good
-it 'publishes the article' do
-  expect { article.publish }.to change { Article.count }.by(1)
-end
-```
+## Code organization
 
 ### Shared Examples
 Use shared examples to reduce code duplication.
@@ -579,21 +465,153 @@ end
 ```
 
 
-### Leading subject
-When subject is used, it should be the first declaration in the example group.
+
+
+### Context Cases
+
+`context` blocks should pretty much always have an opposite negative case.
+It is a code smell if there is a single context (without a matching negative case), and this code needs refactoring, or may have no purpose.
+
+```ruby
+# bad - needs refactoring
+describe '#attributes' do
+  context 'the returned hash' do
+    it 'includes the display name' do
+      # ...
+    end
+
+    it 'includes the creation time' do
+      # ...
+    end
+  end
+end
+
+# bad - the negative case needs to be tested, but isn't
+describe '#attributes' do
+  context 'when display name is present' do
+    before do
+      subject.display_name = 'something'
+    end
+
+    it 'includes the display name' do
+      # ...
+    end
+  end
+end
+
+# good
+describe '#attributes' do
+  subject { FactoryBot.create(:article) }
+
+  specify do
+    expect(subject.attributes).to include subject.display_name
+    expect(subject.attributes).to include subject.created_at
+  end
+end
+
+describe '#attributes' do
+  context 'when display name is present' do
+    before do
+      subject.display_name = 'something'
+    end
+
+    it 'includes the display name' do
+      # ...
+    end
+  end
+
+  context 'when display name is not present' do
+    before do
+      subject.display_name = nil
+    end
+
+    it 'does not include the display name' do
+      # ...
+    end
+  end
+end
+```
+
+
+### Use contexts
+Contexts are a powerful method to make your tests clear and well organized. In the long term this practice will keep tests easy to read.
+
+```ruby
+# BAD
+it 'has 200 status code if logged in' do
+  expect(response).to respond_with 200
+end
+
+it 'has 401 status code if not logged in' do
+  expect(response).to respond_with 401
+end
+
+# GOOD
+context 'when logged in' do
+  it { is_expected.to respond_with 200 }
+end
+
+context 'when logged out' do
+  it { is_expected.to respond_with 401 }
+end
+```
+
+
+### Single expectation test
+
+The 'one expectation' tip is more broadly expressed as 'each test should make only one assertion'.
+This helps you on finding possible errors, going directly to the failing test, and to make your code readable.
+
+Except for tests that are not isolated: feature specs, mainly the ones that use JS; and services that make requests to external APIs.
+Specs that just use the database do not fall into this exception.
+
+```ruby
+# bad
+it 'does the thing' do
+  expect(service.call).to be_truthy
+  expect(Thing.last.done?).to be_truthy
+end
+
+# good
+it { is_expected.to respond_with_content_type(:json) }
+it { is_expected.to assign_to(:resource) }
+
+# good (not isolated)
+it 'does the thing' do
+  click_on "Do it"
+  expect(Thing.last.done?).to be_truthy
+  click_on "Undo it"
+  expect(Thing.last.done?).to be_falsy
+end
+```
+### Empty lines
+
+- Group `let`, `subject` blocks and separate them from `before`/`after` blocks.
+- Leave one empty line between `feature`, `context` or `describe` blocks.
+- Leave one empty line around `it` blocks. This helps to separate the expectations from their conditional logic (contexts for instance).
 
 ```ruby
 # bad
 describe Article do
+  subject { FactoryBot.create(:some_article) }
+  let(:user) { FactoryBot.create(:user) }
   before do
     # ...
   end
-
-  let(:user) { FactoryBot.create(:user) }
-  subject { FactoryBot.create(:some_article) }
-
-  describe '#summary' do
+  after do
     # ...
+  end
+  describe '#summary' do
+    it 'something' do
+    end
+    it 'something' do
+    end
+  end
+  describe '#summary' do
+    it 'something' do
+    end
+    it 'something' do
+    end
   end
 end
 
@@ -606,8 +624,72 @@ describe Article do
     # ...
   end
 
-  describe '#summary' do
+  after do
     # ...
   end
+
+  describe '#summary' do
+    it 'something' do
+    end
+
+    it 'something' do
+    end
+  end
+
+  describe '#summary' do
+    it 'something' do
+    end
+
+    it 'something' do
+    end
+  end
 end
+```
+
+
+
+## Etc
+
+### Stub HTTP Requests
+
+Stub HTTP requests when the code is making them.
+Avoid hitting real external services.
+
+Use [VCR](https://github.com/vcr/vcr).
+
+```ruby
+# good
+context 'with unauthorized access' do
+  let(:uri) { 'http://api.lelylan.com/types' }
+
+  before { stub_request(:get, uri).to_return(status: 401, body: fixture('401.json')) }
+
+  it 'returns access denied' do
+    page.driver.get uri
+    expect(page).to have_content 'Access denied'
+  end
+end
+```
+
+
+
+### Factories
+
+Use [Factory Bot](https://github.com/thoughtbot/factory_bot) to create test data in integration tests.
+You should very rarely have to use `ModelName.create` within an integration spec.
+Do *not* use fixtures as they are not nearly as maintainable as factories.
+
+```ruby
+# bad
+subject(:article) do
+  Article.create(
+    title: 'Piccolina',
+    author: 'John Archer',
+    published_at: '17 August 2172',
+    approved: true
+  )
+end
+
+# good
+subject(:article) { FactoryBot.create(:article) }
 ```
