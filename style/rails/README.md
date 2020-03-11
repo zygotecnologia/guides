@@ -231,6 +231,9 @@ From [Sidekiq docs](https://github.com/mperham/sidekiq/wiki/Best-Practices#1-mak
 > [...] Don't pass symbols, named parameters or complex Ruby objects (like Date or Time!)
 > as those will not survive the dump/load round trip correctly.
 
+Remember this includes the usage of `.delay` method when sending emails, since this method schedules a job in Sidekiq.
+So the same rule applies when passing parameter to `.delay`.
+
 When dealing with time, use `.iso8601` to convert it into string and back to Datetime.
 
 ```ruby
@@ -247,7 +250,6 @@ end
 
 BadReleaseStoreWorker.perform_async(Store.last, Time.zone.now)
 
-
 # good
 class GoodReleaseStoreWorker
   include Sidekiq::Worker
@@ -263,4 +265,23 @@ class GoodReleaseStoreWorker
 end
 
 GoodReleaseStoreWorker.perform_async(Store.last.id, Time.zone.now.iso8601)
+
+
+# bad
+class BadReleaseMailer
+  def send(store, moment)
+    # Mail sending logic here
+  end
+end
+
+BadReleaseMailer.delay(queue: :standard).send(Store.last, Time.zone.now)
+
+# good
+class GoodReleaseMailer
+  def send(store_id, moment)
+    # Mail sending logic here
+  end
+end
+
+BadReleaseMailer.delay(queue: :standard).send(Store.last.id, Time.zone.now.iso8601)
 ```
