@@ -232,7 +232,7 @@ From [Sidekiq docs](https://github.com/mperham/sidekiq/wiki/Best-Practices#1-mak
 > as those will not survive the dump/load round trip correctly.
 
 Remember this includes the usage of `.delay` method when sending emails, since this method schedules a job in Sidekiq.
-So the same rule applies when passing parameter to `.delay`.
+So the same rule applies when passing parameters to methods after `.delay`/`.delay_until`/`.delay_for`...
 
 When dealing with time, use `.iso8601` to convert it into string and back to Datetime.
 
