@@ -1,11 +1,37 @@
 HTML
 ====
-### Basic formatting rules
-
 * List and description of the usable HTML tags:
 [usable tags](USABLE_TAGS.md)
 
-* Use soft-tabs with a two space indent;
+- [HTML](#html)
+- [Formatting and Spacing](#formatting-and-spacing)
+  - [Use soft-tabs with a two space indent;](#use-soft-tabs-with-a-two-space-indent)
+  - [Use only lowercase;](#use-only-lowercase)
+- [Tag use rules](#tag-use-rules)
+  - [To bold text, use the **strong** tag;](#to-bold-text-use-the-strong-tag)
+  - [Use **span** tag only to apply styles inside from other text tag;](#use-span-tag-only-to-apply-styles-inside-from-other-text-tag)
+  - [Don't use tags **h(h1, h2, h3, h4..)** outside titles and subtitles;](#dont-use-tags-hh1-h2-h3-h4-outside-titles-and-subtitles)
+  - [The tag **ul** is used in **Unordered** lists. **ol** is used in **Ordered lists**.](#the-tag-ul-is-used-in-unordered-lists-ol-is-used-in-ordered-lists)
+  - [Use the **main** tag to the main content of the page;](#use-the-main-tag-to-the-main-content-of-the-page)
+  - [**Input** and **label** tags must be in the same wrapper;](#input-and-label-tags-must-be-in-the-same-wrapper)
+  - [Always use double quotes for attributes;](#always-use-double-quotes-for-attributes)
+  - [Single line comment must be placed before tag;](#single-line-comment-must-be-placed-before-tag)
+  - [Headlines must be places in hierarchical order;](#headlines-must-be-places-in-hierarchical-order)
+  - [Newline between tag name and content must be avoided;](#newline-between-tag-name-and-content-must-be-avoided)
+  - [Don't omit optional closing tags;](#dont-omit-optional-closing-tags)
+  - [Use HTML5;](#use-html5)
+  - [Use HTTPS for embedded resources where possible..](#use-https-for-embedded-resources-where-possible)
+  - [For navigation block, use **nav** structure with **ul** or **ol**, **li** and **a**;](#for-navigation-block-use-nav-structure-with-ul-or-ol-li-and-a)
+  - [The `<br>` tag should be used only inside a `<p>` tag, and never more than one in a row;](#the-br-tag-should-be-used-only-inside-a-p-tag-and-never-more-than-one-in-a-row)
+  - [The `<br>` tag should be always alone in a new line;](#the-br-tag-should-be-always-alone-in-a-new-line)
+  - [Use **`<figure>`** tag and **`<figcaption>`** tag for figures with subtitles ;](#use-figure-tag-and-figcaption-tag-for-figures-with-subtitles-)
+  - [Use **`alt`** attribute for **`<img>`** tag. The text should describe the image;](#use-alt-attribute-for-img-tag-the-text-should-describe-the-image)
+  - [Block, list and table elements MUST start on a new line and their children MUST be indented.](#block-list-and-table-elements-must-start-on-a-new-line-and-their-children-must-be-indented)
+  - [Use **`data-atributes`** to attribute **`Javascript`** actions.](#use-data-atributes-to-attribute-javascript-actions)
+
+# Formatting and Spacing
+
+## Use soft-tabs with a two space indent;
 ```html
 <!-- Recommended -->
 <main>
@@ -22,7 +48,7 @@ HTML
 </main>
 ```
 
-* Use only lowercase;
+## Use only lowercase;
 ```html
 <!-- Recommended -->
 <main>
@@ -43,9 +69,9 @@ HTML
 
 * End each file with a newline.
 
-### Other formatting rules
+# Tag use rules
 
-* To bold text, use the **strong** tag;
+## To bold text, use the **strong** tag;
 ```html
 <!-- Recommended -->
 <p><strong>Lorem ipsum</strong></p>
@@ -57,7 +83,7 @@ HTML
 <p><b>Lorem ipsum</b></p>
 ```
 
-* Use **span** tag only to apply styles inside from other text tag;
+## Use **span** tag only to apply styles inside from other text tag;
 ```html
 <!-- Recommended -->
 <p><span>Lorem ipsum</span> dolor sit amet..</p>
@@ -66,7 +92,7 @@ HTML
 <span>Lorem ipsum</span>
 ```
 
-* Don't use tags **h(h1, h2, h3, h4..)** outside titles and subtitles;
+## Don't use tags **h(h1, h2, h3, h4..)** outside titles and subtitles;
 ```html
 <!-- Recommended -->
 <h1>Post Title</h1>
@@ -88,9 +114,58 @@ HTML
 ```
 
 
-* The tag **ul** is used in Unordered lists. **ol** is used in **Ordered lists**.
+## The tag **ul** is used in **Unordered** lists. **ol** is used in **Ordered lists**.
+```html
+<!-- Recommended -->
+<ul>
+  <li class="row">
+    <div class="col-6">
+      user name
+    </div>
+    <div class="col-6">
+      user email
+    </div>
+  </li>
+</ul>
 
-* Use the **main** tag to the main content of the page;
+<ol>
+  <li class="row">
+    <div class="col-6">
+      user purchase date
+    </div>
+    <div class="col-6">
+      user purchase value
+    </div>
+  </li>
+</ol>
+
+<!-- Not Recommended -->
+
+<div>
+  <div class="row">
+    <div class="col-6">
+      user name
+    </div>
+    <div class="col-6">
+      user email
+    </div>
+  </div>
+</div>
+
+<div>
+  <div class="row">
+    <div class="col-6">
+      user purchase date
+    </div>
+    <div class="col-6">
+      user purchase value
+    </div>
+  </div>
+</div>
+
+```
+
+## Use the **main** tag to the main content of the page;
 ```html
 <!-- Recommended -->
 <html>
@@ -113,7 +188,7 @@ HTML
 </html>
 ```
 
-* **Input** and **label** tags must be in the same wrapper;
+## **Input** and **label** tags must be in the same wrapper;
 ```html
 <!-- Recommended -->
 <div>
@@ -138,7 +213,7 @@ HTML
 </div>
 ```
 
-* Always use double quotes for attributes;
+## Always use double quotes for attributes;
 ```html
 <!-- Recommended -->
 <label for="email">What's your e-mail?</label>
@@ -149,7 +224,7 @@ HTML
 <input type='text' id='email'>
 ```
 
-* Single line comment must be placed before tag;
+## Single line comment must be placed before tag;
 ```html
 <!-- Recommended -->
 <!-- TODO: Trocar este icone para o correto -->
@@ -160,7 +235,7 @@ HTML
 <!-- TODO: Trocar este icone para o correto -->
 ```
 
-* Headlines must be places in hierarchical order;
+## Headlines must be places in hierarchical order;
 ```html
 <!-- Recommended -->
 <h1>Title</h1>
@@ -175,7 +250,7 @@ HTML
 <h1>Subtitle</h1>
 ```
 
-* Newline between tag name and content must be avoided;
+## Newline between tag name and content must be avoided;
 ```html
 <!-- Recommended -->
 <div>
@@ -189,7 +264,7 @@ HTML
 </div>
 ```
 
-* Don't omit optional closing tags;
+## Don't omit optional closing tags;
 ```html
 <!-- Recommended -->
 <!DOCTYPE html>
@@ -208,10 +283,10 @@ HTML
 <p>Qed.
 ```
 
-* Use HTML5;
+## Use HTML5;
   * It’s recommended to use HTML, as text/html. Do not use XHTML. XHTML, as application/xhtml+xml, lacks both browser and infrastructure support and offers less room for optimization than HTML.
 
-* Use HTTPS for embedded resources where possible..
+## Use HTTPS for embedded resources where possible..
 ```html
 <!-- Recommended -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
@@ -223,7 +298,7 @@ HTML
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 ```
 
-* For navigation block, use **nav** structure with **ul** or **ol**, **li** and **a**;
+## For navigation block, use **nav** structure with **ul** or **ol**, **li** and **a**;
 ```html
 <!-- Recommended -->
 <nav>
@@ -260,7 +335,7 @@ HTML
 <nav>
 ```
 
-* The `<br>` tag should be used only inside a `<p>` tag, and never more than one in a row;
+## The `<br>` tag should be used only inside a `<p>` tag, and never more than one in a row;
 ```html
 <!-- Recommended -->
 <div>
@@ -296,7 +371,7 @@ HTML
 </div>
 ```
 
-* The `<br>` tag should be always alone in a new line;
+## The `<br>` tag should be always alone in a new line;
 ```html
 <!-- Recommended -->
 <div>
@@ -317,7 +392,7 @@ HTML
 </div>
 ```
 
-* Use **`<figure>`** tag and **`<figcaption>`** tag for figures with subtitles ;
+## Use **`<figure>`** tag and **`<figcaption>`** tag for figures with subtitles ;
 ```html
 <!-- Recommended -->
 <figure>
@@ -330,7 +405,7 @@ HTML
 <p>Fig.1 - Trulli, Puglia, Italy.</p>
 ```
 
-* Use **`alt`** attribute for **`<img>`** tag. The text should describe the image;
+## Use **`alt`** attribute for **`<img>`** tag. The text should describe the image;
 ```html
 <!-- Recommended -->
 <img src="smiley.gif" alt="Smiley face">
@@ -339,7 +414,7 @@ HTML
 <img src="smiley.gif">
 ```
 
-* Block, list and table elements MUST start on a new line and their children MUST be indented.
+## Block, list and table elements MUST start on a new line and their children MUST be indented.
 ```html
 <!-- Recommended Block -->
 <div>
@@ -465,7 +540,7 @@ Hello World
 
 ```
 
-* Use **`data-atributes`** to attribute **`Javascript`** actions.
+## Use **`data-atributes`** to attribute **`Javascript`** actions.
 ```html
 <!-- Recommended -->
 <button type="button" class="btn btn-primary" data-click-here> Clique Aqui </button>

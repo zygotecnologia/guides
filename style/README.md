@@ -11,6 +11,7 @@ We have the following more detailed style guides:
 
 * [Git](git)
 * [HTML](html)
+* [SCSS-CSS](scss-css)
 * [Rails](rails)
 * [RSpec](rspec)
 * [Ruby](ruby)

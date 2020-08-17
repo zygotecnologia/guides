@@ -14,6 +14,8 @@
   * [Rails](./style/rails) (under construction 🚧)
   * [RSpec](./style/rspec) (under construction 🏗)
   * [Ruby](./style/ruby)
+  * [HTML](./style/html)
+  * [SCSS-CSS](./style/scss-css)
 
 # Chapters
 The guides are maintened by ours backend and frontend chapters, with each one responsible for some guides as below
@@ -22,8 +24,9 @@ The guides are maintened by ours backend and frontend chapters, with each one re
   * [Rails](./style/rails)
   * [RSpec](./style/rspec)
   * [Ruby](./style/ruby)
-* Frontend 
+* Frontend
   * [HTML](./style/html)
+  * [SCSS-CSS](./style/scss-css)
 
 # License
 
