@@ -175,7 +175,7 @@ $length: 0em;
   padding: 4em;
 }
 ```
-## Sort element proprieties based on two categories: "box" and "others"
+## Sort element properties based on two categories: "box" and "others"
 * The "box" category includes the following attributes:
   * display;
   * height;
