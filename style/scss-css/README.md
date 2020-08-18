@@ -175,3 +175,51 @@ $length: 0em;
   padding: 4em;
 }
 ```
+## Sort element properties based on two categories: "box" and "others"
+* The "box" category includes the following attributes:
+  * display;
+  * height;
+  * margin;
+  * padding;
+  * position;
+  * width;
+* The "others" category includes any other attribute which isn't in the "box" category
+* Both categories must be in alphabetical order
+* The categories must be separated by an empty line
+
+```css
+/* Recommended */
+.class {
+  display: flex;
+  height: 20px;
+  margin: 10px;
+  padding: 10px;
+  position: absolute;
+  width: 30px;
+
+  align-content: center;
+  color: red;
+  cursor: pointer;
+  font-size: 40px;
+  z-index: 9999;
+}
+
+/* Not recommended */
+.class {
+  padding: 0;
+  width: 100px;
+  font-size: 1.25em;
+  z-index: 1;
+}
+
+/* Not recommended */
+.class {
+  cursor: pointer;
+  color: red;
+  z-index: 1;
+  width: 200px;
+  font-size: 1.25em;
+  position: relative;
+  margin: 0 auto;
+}
+```
