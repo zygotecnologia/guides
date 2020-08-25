@@ -13,6 +13,7 @@ Scss and CSS
   - [When dealing with numbers, zeros should not have a unit](#when-dealing-with-numbers-zeros-should-not-have-a-unit)
   - [Put a space before the opening brace `{` in rule declarations. Put closing braces `}` of rule declarations on a new line.](#put-a-space-before-the-opening-brace--in-rule-declarations-put-closing-braces--of-rule-declarations-on-a-new-line)
   - [Put blank lines between rule declarations.](#put-blank-lines-between-rule-declarations)
+  - [Write CSS/SCSS in SMACSS format](#write-css/scss-in-smacss-format)
 
 ---------------------------------------------
 
@@ -223,3 +224,37 @@ $length: 0em;
   margin: 0 auto;
 }
 ```
+
+## Write CSS/SCSS in SMACSS format
+
+* Keep classes lowercase and use dashes (not underscores or camelCase). Dashes serve as natural breaks in related class (e.g., .btn and .btn-danger).
+```css
+/* Recommended */
+.btn-danger {
+  ...
+}
+
+/* Not recommended */
+.btnDanger {
+  ...
+}
+```
+
+* Avoid excessive and arbitrary shorthand notation. .btn is useful for button, but .s doesn't mean anything.
+
+* Use meaningful names; use structural or purposeful names over presentational.
+
+* Keep classes as short and succinct as possible.
+```css
+/* Recommended */
+.btn-danger {
+  ...
+}
+
+/* Not recommended */
+.round-danger-button-with-white-letter {
+  ...
+}
+```
+* Prefix classes based on the closest parent or base class.
+
