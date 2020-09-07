@@ -176,17 +176,28 @@ $length: 0em;
   padding: 4em;
 }
 ```
-## Sort element properties based on two categories: "box" and "others"
-* The "box" category includes the following attributes:
-  * display;
-  * height;
-  * margin;
-  * padding;
-  * position;
-  * width;
-* The "others" category includes any other attribute which isn't in the "box" category
-* Both categories must be in alphabetical order
-* The categories must be separated by an empty line
+
+## Sort element properties based on SMACSS rules
+The properties should follow [SMACSS rules](http://smacss.com/book/formatting).
+
+Order:
+1. Box
+2. Border
+3. Background
+4. Text
+5. Other
+
+Separate each block with an empty line.
+
+To make this rule easier to follow you can use [sass-lint](https://github.com/sasstools/sass-lint) with the following configuration:
+
+```yaml
+rules:
+  property-sort-order:
+    - 1
+    -
+      order: 'smacss'
+```
 
 ```css
 /* Recommended */
@@ -198,6 +209,8 @@ $length: 0em;
   position: absolute;
   width: 30px;
 
+  border: 1px solid #CCC;
+
   align-content: center;
   color: red;
   cursor: pointer;
@@ -205,7 +218,7 @@ $length: 0em;
   z-index: 9999;
 }
 
-/* Not recommended */
+/* Not recommended (no space between blocks) */
 .class {
   padding: 0;
   width: 100px;
@@ -213,7 +226,7 @@ $length: 0em;
   z-index: 1;
 }
 
-/* Not recommended */
+/* Not recommended (wrong order) */
 .class {
   cursor: pointer;
   color: red;
@@ -257,4 +270,3 @@ $length: 0em;
 }
 ```
 * Prefix classes based on the closest parent or base class.
-
