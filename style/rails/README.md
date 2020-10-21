@@ -231,3 +231,54 @@ Also, it is very likely to cause a bug when different partials have the same nam
 # good
 <%= render "scope/resource/partial_name" %>
 ```
+
+# Sidekiq
+
+## Parameter passing
+
+Whenever calling Sidekiq jobs, the parameters sent in the `perform` call must be composed of simple JSON datatypes,
+since Sidekiq convert the parameters to JSON in order to store it in Redis, and complex Ruby objects will look like
+`#<Quote:0x0000000006e57288>`
+From [Sidekiq docs](https://github.com/mperham/sidekiq/wiki/Best-Practices#1-make-your-job-parameters-small-and-simple)
+
+>The arguments you pass to perform_async must be composed of simple JSON datatypes:
+> string, integer, float, boolean, null(nil), array and hash.
+> This means you must not use ruby symbols as arguments.
+> [...] Don't pass symbols, named parameters or complex Ruby objects (like Date or Time!)
+> as those will not survive the dump/load round trip correctly.
+
+Remember this includes the usage of `.delay` method when sending emails, since this method schedules a job in Sidekiq.
+So the same rule applies when passing parameters to methods after `.delay`/`.delay_until`/`.delay_for`...
+
+When dealing with time, use `.iso8601` to convert it into string and back to Datetime.
+
+```ruby
+# bad
+class BadReleaseStoreWorker
+  include Sidekiq::Worker
+
+  def perform(store, moment)
+    return if moment.saturday? || moment.sunday?
+
+    store.update(released_at: moment)
+  end
+end
+
+BadReleaseStoreWorker.perform_async(Store.last, Time.zone.now)
+
+# good
+class GoodReleaseStoreWorker
+  include Sidekiq::Worker
+
+  def perform(store_id, moment)
+    store = Store.find(store_id)
+    moment = moment.to_datetime
+
+    return if moment.saturday? || moment.sunday?
+
+    store.update(released_at: moment)
+  end
+end
+
+GoodReleaseStoreWorker.perform_async(Store.last.id, Time.zone.now.iso8601)
+```

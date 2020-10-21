@@ -13,6 +13,7 @@ Scss and CSS
   - [When dealing with numbers, zeros should not have a unit](#when-dealing-with-numbers-zeros-should-not-have-a-unit)
   - [Put a space before the opening brace `{` in rule declarations. Put closing braces `}` of rule declarations on a new line.](#put-a-space-before-the-opening-brace--in-rule-declarations-put-closing-braces--of-rule-declarations-on-a-new-line)
   - [Put blank lines between rule declarations.](#put-blank-lines-between-rule-declarations)
+  - [Write CSS/SCSS in SMACSS format](#write-css/scss-in-smacss-format)
 
 ---------------------------------------------
 
@@ -175,3 +176,97 @@ $length: 0em;
   padding: 4em;
 }
 ```
+
+## Sort element properties based on SMACSS rules
+The properties should follow [SMACSS rules](http://smacss.com/book/formatting).
+
+Order:
+1. Box
+2. Border
+3. Background
+4. Text
+5. Other
+
+Separate each block with an empty line.
+
+To make this rule easier to follow you can use [sass-lint](https://github.com/sasstools/sass-lint) with the following configuration:
+
+```yaml
+rules:
+  property-sort-order:
+    - 1
+    -
+      order: 'smacss'
+```
+
+```css
+/* Recommended */
+.class {
+  display: flex;
+  height: 20px;
+  margin: 10px;
+  padding: 10px;
+  position: absolute;
+  width: 30px;
+
+  border: 1px solid #CCC;
+
+  align-content: center;
+  color: red;
+  cursor: pointer;
+  font-size: 40px;
+  z-index: 9999;
+}
+
+/* Not recommended (no space between blocks) */
+.class {
+  padding: 0;
+  width: 100px;
+  font-size: 1.25em;
+  z-index: 1;
+}
+
+/* Not recommended (wrong order) */
+.class {
+  cursor: pointer;
+  color: red;
+  z-index: 1;
+  width: 200px;
+  font-size: 1.25em;
+  position: relative;
+  margin: 0 auto;
+}
+```
+
+## Write CSS/SCSS in SMACSS format
+
+* Keep classes lowercase and use dashes (not underscores or camelCase). Dashes serve as natural breaks in related class (e.g., .btn and .btn-danger).
+```css
+/* Recommended */
+.btn-danger {
+  ...
+}
+
+/* Not recommended */
+.btnDanger {
+  ...
+}
+```
+
+* Avoid excessive and arbitrary shorthand notation. .btn is useful for button, but .s doesn't mean anything.
+
+* Use meaningful names; use structural or purposeful names over presentational.
+
+* Keep classes as short and succinct as possible.
+```css
+/* Recommended */
+.btn-danger {
+  ...
+}
+
+/* Not recommended */
+.round-danger-button-with-white-letter {
+  ...
+}
+```
+* Prefix classes based on the closest parent or base class.

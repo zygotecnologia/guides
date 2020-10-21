@@ -14,16 +14,19 @@
   * [Rails](./style/rails) (under construction 🚧)
   * [RSpec](./style/rspec) (under construction 🏗)
   * [Ruby](./style/ruby)
+  * [HTML](./style/html)
+  * [SCSS-CSS](./style/scss-css)
 
 # Chapters
 The guides are maintened by ours backend and frontend chapters, with each one responsible for some guides as below
 
-* Backend ([@jplethier](https://github.com/jplethier), [@evsasse](https://github.com/evsasse), [@JoaoFagundes](https://github.com/JoaoFagundes), [@losoliveirasilva](https://github.com/losoliveirasilva), [@leandroh](https://github.com/leandroh))
+* Backend
   * [Rails](./style/rails)
   * [RSpec](./style/rspec)
   * [Ruby](./style/ruby)
-* Frontend ([@jplethier](https://github.com/jplethier), [@abrunamartini](https://github.com/abrunamartini), [@CarlosMouraJR](https://github.com/CarlosMouraJR), [@jevel9](https://github.com/jevel9), [@natankruger](https://github.com/natankruger))
+* Frontend
   * [HTML](./style/html)
+  * [SCSS-CSS](./style/scss-css)
 
 # License
 
