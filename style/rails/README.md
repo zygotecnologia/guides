@@ -216,6 +216,22 @@ resources :photos do
 end
 ```
 
+# Rendering
+
+## Avoid relative path in partial rendering
+
+Using relative path to render a partial in a view leads to a [slower page loading](https://medium.com/wantedly-engineering/a-simple-fix-to-improve-partial-rendering-speed-by-30-in-a-large-rails-application-9696a92f4ae1).
+Also, it is very likely to cause a bug when different partials have the same name. So, always use the full path from the `views` folder.
+
+```ruby
+# file name: app/views/scope/resource/partial_name
+# bad
+<%= render "partial_name" %>
+
+# good
+<%= render "scope/resource/partial_name" %>
+```
+
 # Sidekiq
 
 ## Parameter passing
@@ -265,23 +281,4 @@ class GoodReleaseStoreWorker
 end
 
 GoodReleaseStoreWorker.perform_async(Store.last.id, Time.zone.now.iso8601)
-
-
-# bad
-class BadReleaseMailer
-  def send(store, moment)
-    # Mail sending logic here
-  end
-end
-
-BadReleaseMailer.delay(queue: :standard).send(Store.last, Time.zone.now)
-
-# good
-class GoodReleaseMailer
-  def send(store_id, moment)
-    # Mail sending logic here
-  end
-end
-
-BadReleaseMailer.delay(queue: :standard).send(Store.last.id, Time.zone.now.iso8601)
 ```
