@@ -216,7 +216,6 @@ resources :photos do
 end
 ```
 
-
 # Rendering
 
 ## Avoid relative path in partial rendering
