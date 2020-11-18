@@ -274,7 +274,7 @@ Also, avoid hardcoding unnecessary attributes for the same reason.
 before { Timecop.travel(Time.zone.parse("2020/02/10 20:15")) }
 
 # also bad if hour and minute are irrelevant
-before { Timecop.travel(Time.zone.now.change(year: 2020, month: 2, day: 10, hour: 20, minute: 15 )) }
+before { Timecop.travel(Time.zone.now.change(year: 2020, month: 2, day: 10, hour: 20, min: 15 )) }
 
 # good
 before { Timecop.travel(Time.zone.now.change(year: 2020, month: 2, day: 10)) }
