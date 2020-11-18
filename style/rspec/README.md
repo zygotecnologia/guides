@@ -258,7 +258,7 @@ before { Timecop.travel(Time.zone.now.change(month: 1, day: 1)) }
 before { Timecop.travel(Time.zone.now.beginning_of_year) }
 
 # bad
-before { Timecop.travel(1.day.ago.change(hour: 23, minute: 59, second: 59)) }
+before { Timecop.travel(1.day.ago.change(hour: 23, min: 59, sec: 59)) }
 
 # good
 before { Timecop.travel(1.day.ago.end_of_day) }
@@ -274,7 +274,7 @@ Also, avoid hardcoding unnecessary attributes for the same reason.
 before { Timecop.travel(Time.zone.parse("2020/02/10 20:15")) }
 
 # also bad if hour and minute are irrelevant
-before { Timecop.travel(Time.zone.now.change(year: 2020, month: 2, day: 10, hour: 20, minute: 15 )) }
+before { Timecop.travel(Time.zone.now.change(year: 2020, month: 2, day: 10, hour: 20, min: 15 )) }
 
 # good
 before { Timecop.travel(Time.zone.now.change(year: 2020, month: 2, day: 10)) }
